@@ -1,0 +1,5 @@
+modelNweight/
+.idea
+.yolov5m.pt
+
+.yolov5s.pt
