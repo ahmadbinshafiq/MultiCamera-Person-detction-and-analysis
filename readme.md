@@ -1,6 +1,6 @@
 # Installation guide
 
-After cloning the repo, download the [gender and age detector model weights] (https://drive.google.com/uc?id=1_aDScOvBeBLCn_iv0oxSO8X1ySQpSbIS), and place them inside your working directory. 
+After cloning the repo, download the [gender and age detector model weights](https://drive.google.com/uc?id=1_aDScOvBeBLCn_iv0oxSO8X1ySQpSbIS), and place them inside your working directory. 
 
 ## Python packages installation
 
