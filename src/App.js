@@ -5,7 +5,7 @@ import Card from './dummycomponent/Card'
 function App() {
   return (
     <div
-        class="bg_image"
+        class="background_image"
         style={{
           backgroundImage: 'url("https://th.bing.com/th/id/OIP.nfpQv_isCYml-SajqDk-LQHaEo?pid=ImgDet&rs=1")',
           backgroundSize: "cover",
