@@ -1,22 +1,27 @@
+import "./App.css";
+import SideBar from "./components/SideBar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import './App.css';
-import New from './dummycomponent/New';
-import Card from './dummycomponent/Card'
+import Dashboard from "./pages/Dashboard";
+import Messages from "./pages/Messages";
+import Analytics from "./pages/Analytics";
+import Cameras from "./pages/Cameras";
+
 function App() {
   return (
-    <div
-        class="background_image"
-        style={{
-          backgroundImage: 'url("https://th.bing.com/th/id/OIP.nfpQv_isCYml-SajqDk-LQHaEo?pid=ImgDet&rs=1")',
-          backgroundSize: "cover",
-          height: "100vh",
-          color: "#f5f5f5"
-        }}
-      >
-      {/* <img src="https://th.bing.com/th/id/OIP.nfpQv_isCYml-SajqDk-LQHaEo?pid=ImgDet&rs=1" alt="..."/> */}
-      <New></New>
-      <Card></Card>
-    </div>
+    <Router>
+      <SideBar>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/cameras" element={<Cameras />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/cameras" element={<Cameras />} />
+
+          <Route path="*" element={<> not found</>} />
+        </Routes>
+      </SideBar>
+    </Router>
   );
 }
 
