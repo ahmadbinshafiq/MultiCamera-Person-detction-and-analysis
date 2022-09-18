@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Messages from "./pages/Messages";
 import Analytics from "./pages/Analytics";
 import Cameras from "./pages/Cameras";
+import CameraType from "./pages/CameraType";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/cameras" element={<Cameras />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/analytics" element={<Analytics />} />
-          <Route path="/cameras" element={<Cameras />} />
+          <Route path="/saved" element={<CameraType />} />
 
           <Route path="*" element={<> not found</>} />
         </Routes>
