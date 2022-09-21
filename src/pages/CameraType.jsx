@@ -17,6 +17,28 @@ function CameraType() {
     const [colorcctv,setcolorcctv]=useState("grey");
     const [colormob,setcolormob]=useState("grey");
 
+    const postdata=()=>{
+      console.log("DD")
+      
+    }
+    const handleSubmit = (event) => {
+      console.log('Called handleSubmit')
+      event.preventDefault()
+      fetch(`/video_feed/emp/`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              camera_ip: "24",
+              camera_name:"ali",
+              camera_port:14
+          })
+      })
+          .then(res => res.json())
+
+          .catch(err => console.log(err))
+  }
     const changeColorcctv=()=>{
       
       if (colorcctv==="fed131"){
@@ -67,7 +89,7 @@ function CameraType() {
               </div>
             </Col>
             <Col>
-              <button style={buttonstyle}>Submit</button>
+              <button style={buttonstyle} onClick={handleSubmit}>Submit</button>
             </Col>
           </Row>
         </form>
@@ -149,3 +171,20 @@ function CameraType() {
 }
 
 export default CameraType
+
+/* const handleSubmit = (event) => {
+  console.log('Called handleSubmit')
+  event.preventDefault()
+  fetch(`/video_feed/getemp`, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+      .then(res => res.json())
+      .then(data => {
+          console.log('data', data[1].employee_id)
+          
+      })
+      .catch(err => console.log(err))
+} */

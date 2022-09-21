@@ -114,6 +114,7 @@ const SideBar = ({ children }) => {
                   animate="show"
                   exit="hidden"
                   className="logo"
+               
                 >
                   SurveillanceApp
                 </motion.h1>
