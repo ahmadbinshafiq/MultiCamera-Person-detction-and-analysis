@@ -4,6 +4,8 @@ import { MdMessage } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { TbFrame } from "react-icons/tb";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -16,6 +18,20 @@ const routes = [
     path: "/cameras",
     name: "Cameras",
     icon: <FaCamera />,
+    exact: true,
+    subRoutes: [
+      {
+        path: "/cameras/gridview",
+        name: "Grid",
+        icon: <BsFillGrid3X3GapFill />,
+      },
+      {
+        path: "/cameras/frameview",
+        name: "Frame",
+        icon: <TbFrame />,
+      },
+
+    ],
   },
   {
     path: "/messages",

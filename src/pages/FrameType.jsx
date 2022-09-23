@@ -2,9 +2,13 @@ import React,{ useState }  from 'react';
 import {motion} from 'framer-motion';
 import {link} from 'react-router-dom';
 import { BiCctv } from "react-icons/bi";
-import { AiOutlineMobile } from "react-icons/ai";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import { MdOutlineCameraIndoor } from "react-icons/md";
+import { MdCameraOutdoor } from "react-icons/md";
+import { MdOtherHouses } from "react-icons/md";
 import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
 function CameraType() {
+  const ip2=["11"]
   const buttonstyle = {
     color: "white",
     backgroundColor: "black",
@@ -15,14 +19,12 @@ function CameraType() {
   };
     const [modal,setmodal]=useState(false);
     const [colorcctv,setcolorcctv]=useState("grey");
-    const [colormob,setcolormob]=useState("grey");
-    const [camname,setcamname]=useState("");
-    const [camip,setcamip]=useState("");
-    const [camport,setcamport]=useState("");
+    const [colorin,setcolorin]=useState("grey");
+    const [colorout,setcolorout]=useState("grey");
+    const [colorothers,setcolorothers]=useState("grey");
 
     const handleSubmit = (event) => {
       console.log('Called handleSubmit')
-      console.log(camname)
       event.preventDefault()
       fetch(`/video_feed/emp/`, {
           method: 'POST',
@@ -30,9 +32,9 @@ function CameraType() {
               'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              camera_ip: camip,
-              camera_name:camname,
-              camera_port:camport
+              camera_ip: "24",
+              camera_name:"ali",
+              camera_port:14
           })
       })
           .then(res => res.json())
@@ -46,41 +48,45 @@ function CameraType() {
       }
       else{
         setcolorcctv("orange")
-        setcolormob("grey")
-        setmodal(true)
       }
     }
-    const changeColormob=()=>{
-     
-      if (colormob==="fed131"){
-        setcolormob("grey")
+    const changeColorindoor=()=>{
+      
+      if (colorin==="orange"){
+        setcolorin("grey")
       }
       else{
-        setcolormob("fed131")
-        setcolorcctv("grey")
-        setmodal(true)
+        setcolorin("orange")
+        setcolorout("grey")
+        setcolorothers("grey")
       }
     }
-    const handleInputname=(event)=>{
-      const name=event.target.name
-      const value=event.target.value
-      console.log(name,value)
-      setcamname(event.target.value)
-      console.log(camname)
+    const changeColoroutdoor=()=>{
+     
+      if (colorout==="orange"){
+        setcolorout("grey")
+      }
+      else{
+        setcolorout("orange")
+        setcolorin("grey")
+        setcolorothers("grey")
+      }
     }
-    const handleInputip=(event)=>{
-      const name=event.target.name
-      const value=event.target.value
-      console.log(name,value)
-      setcamip(event.target.value) 
-      console.log("camip ",camip)
+    const changeColorothers=()=>{
+     
+      if (colorothers==="orange"){
+        setcolorothers("grey")
+      }
+      else{
+        setcolorothers("orange")
+        setcolorin("grey")
+        setcolorout("grey")
+      }
     }
-    const handleInputport=(event)=>{
-      const name=event.target.name
-      const value=event.target.value
-      console.log(name,value)
-      setcamport(event.target.value) 
-      console.log("camport ",camport)
+    const addframe=()=>{
+
+        setmodal(true)
+      
     }
   return (
     <>
@@ -93,22 +99,39 @@ function CameraType() {
           <Row>
             <Col lg={12}>
               <div>
-                <label htmlFor="name"> Camera Name</label>
-                <input type="text" className='form-control' name={camname} placeholder='Enter Unique Name' onChange={handleInputname} />
+                <label htmlFor="name"> Frame Name</label>
+                <input type="text" className='form-control' placeholder='Enter Unique Name' />
               </div>
             </Col>
-            <Col lg={12}>
+            <Row style={{marginLeft:"2px"}}>  Type of frame</Row>
+            <Row>
+            <Col lg={4}>
+              <Row>
               <div>
-                <label htmlFor="name"> Camera Ip Address</label>
-                <input type="text" className='form-control' name={camip} placeholder='Enter Camera Ip Address' onChange={handleInputip}/>
+              <MdOutlineCameraIndoor size="5rem" color={colorin} onClick={changeColorindoor}/>
               </div>
+              <div style={{marginLeft:"15px"}}>
+              <text>Indoor</text>
+              </div>
+              </Row>
             </Col>
-            <Col lg={12}>
+            <Col lg={4}>
               <div>
-                <label htmlFor="name"> Camera Port </label>
-                <input type="text" className='form-control' name={camport} placeholder='Enter Camera Port e.g 8080' onChange={handleInputport}/>
+              <MdCameraOutdoor size="5rem" color={colorout} onClick={changeColoroutdoor}/>
+              </div>
+              <div style={{marginLeft:"15px"}}>
+              <text className='col-md-2'>Outdoor</text>
               </div>
             </Col>
+            <Col lg={4}>
+              <div>
+              <MdOtherHouses size="5rem" color={colorothers} onClick={changeColorothers}/>
+              </div>
+              <div style={{marginLeft:"15px"}}>
+              <text style={{marginLeft:"2px"}}>Others</text>
+              </div>
+            </Col>
+            </Row>
             <Col>
               <button style={buttonstyle} onClick={handleSubmit}>Submit</button>
             </Col>
@@ -132,7 +155,7 @@ function CameraType() {
         </motion.h1>
         <div class ="container">
           <div class="row" style={{marginTop:"150px"}}>
-            <motion.div className="card" style={{width:"20rem",borderColor:"2px solid black",backgroundColor:"rgba(0,0,0,0.4)"}} 
+          {ip2?.map(x=><motion.div className="card" style={{width:"20rem",borderColor:"2px solid black",backgroundColor:"rgba(0,0,0,0.4)",marginLeft:"70px",marginBottom:"70px"}} 
                           animate={{
                             x:200,
                             rotate:360
@@ -155,16 +178,16 @@ function CameraType() {
                 <div class="col" style={{marginLeft:"15px"}}>
                   <BiCctv size="15rem" color={colorcctv} onClick={changeColorcctv}/>   
               </div>
-              <h5 class="card-title">Ip Camera</h5>
-            </motion.div>
-          
-            <motion.div className="card" style={{width:"20rem",marginLeft:"250px",borderColor:"2px solid black",backgroundColor:"rgba(0,0,0,0.4)"}}
+              <h5 class="card-title">Frame</h5>
+            </motion.div>)}
+            <motion.div className="card" style={{width:"20rem",borderColor:"2px solid black",backgroundColor:"rgba(0,0,0,0.4)",marginLeft:"70px",marginBottom:"70px"}} 
                           animate={{
-                            y:0,
+                            x:200,
                             rotate:360
                           }}
                           initial={{
-                            y:200
+                            x:0
+                            
                           }}
                           transition={{
                             type:"spring",
@@ -172,18 +195,17 @@ function CameraType() {
                           }}
                           whileHover={{
                             scale:1.1
+                            
                           }}
                           whileTap={{
                             scale:0.9
                           }}>
-                <div class="col" style={{marginLeft:"15px"}}>                  
-                  <AiOutlineMobile size="15rem" color={colormob} onClick={changeColormob}/>
+                <div class="col" style={{marginLeft:"15px"}}>
+                  <AiOutlinePlusCircle size="15rem" color={colorcctv} onClick={addframe}/>   
               </div>
-              <h5 class="card-title">Mobile Camera</h5>
+              <h5 class="card-title" style={{alignItems:"center"}}>Add New Frame</h5>
             </motion.div>
-{/*           <div class="col"style={{marginLeft:"100px",border:"3px solid grey"}}>
-              <AiOutlineMobile size="15rem" color={colormob} onClick={changeColormob}/>
-          </div> */}
+            
           </div>
         </div>
 
