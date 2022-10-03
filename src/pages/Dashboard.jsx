@@ -1,5 +1,18 @@
-const Dashboard = () => {
-    return <div className="title"> Dashboard</div>;
-  };
-  
-  export default Dashboard;
+import React from 'react'
+import Linechart from "../components/Linechart";
+import ComputationalCost from "../components/ComputationalCost";
+import CameraView from "../components/CameraView";
+function Dashboard() {
+  return (
+    <>
+    <div >
+      <Linechart />
+      <ComputationalCost/>
+      <CameraView />
+    </div>
+
+    </>
+  )
+}
+
+export default Dashboard

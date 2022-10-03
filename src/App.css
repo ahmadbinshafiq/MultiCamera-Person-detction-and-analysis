@@ -138,10 +138,12 @@ main {
 
 
 .sidebar {
-  background: black;
+  background:#363740;
   color: white;
-  height: 100vh;
+ 
   overflow-y: auto;
+  position: sticky;
+  height: 100vh; 
 }
 
 .top_section {

@@ -10,13 +10,7 @@ import CameraType from "./pages/CameraType";
 
 function App() {
   return (
-    <div         class="background_image"
-    style={{
-      backgroundImage: 'url("https://th.bing.com/th?id=OIF.Y2Li%2fQcXMk1Zv7B%2fjk7UHA&pid=ImgDet&rs=1")',
-      backgroundSize: "cover",
-      height: "100%",
-      color: "#f5f5f5"
-    }}>
+
     <Router>
       <SideBar>
         <Routes>
@@ -33,7 +27,7 @@ function App() {
         </Routes>
       </SideBar>
     </Router>
-    </div>
+
   );
 }
 
