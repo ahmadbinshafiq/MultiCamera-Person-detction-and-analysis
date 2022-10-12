@@ -10,7 +10,7 @@ import CameraType from "./pages/CameraType";
 
 function App() {
   return (
-
+<div style={{backgroundColor:"#F7F8FC"}}>
     <Router>
       <SideBar>
         <Routes>
@@ -27,7 +27,7 @@ function App() {
         </Routes>
       </SideBar>
     </Router>
-
+</div>
   );
 }
 

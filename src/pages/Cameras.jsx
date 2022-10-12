@@ -3,6 +3,7 @@ import React,{useState} from 'react'
 import { useEffect } from 'react';
 import { FaEye } from "react-icons/fa";
 import axios from "axios"
+import CameraView from '../components/CameraView';
 export default function Cameras(props) {
   const [ip,setip]=useState()
    const ip1=[{"camera":1,"cam":1},{"camera":2,"cam":2}]
@@ -35,19 +36,12 @@ useEffect(()=>{
     })
 },[]) */
   return (
-    <div className='col mx-5'>
-        <div className="container">
-        <div className="card col mx-5 mt-5 bg-body" style={{width:'18rem'}}>
-        {/* <button onClick={handleSubmit}>Submit</button> */}
-        {/* {ip1.map(x=><h1 key={x.camera}>{x.camera}</h1>)} */}
-        {ip?.map(x=> <img
-    src={`http://localhost:8000/video_feed/cam/${x.camera}`}
-    alt="Video"
-   />)}
-{        <iframe width="auto" height="auto"
-        src="https://www.youtube.com/embed/tgbNymZ7vqY">
-          
-        </iframe>}
+    <>
+    <CameraView/>
+    </>
+  )
+
+    
 {/*         <iframe width="auto" height="auto"
         src="http://localhost:5000/video_feed">
           
@@ -72,8 +66,5 @@ useEffect(()=>{
                 <p style={{color:"red"}}>Ip: {props.ip}</p>
                 <a href="#" style={{color:"red"}}><FaEye/></a>
             </div> */}
-        </div>
-        </div>
-    </div>
-  )
+
 }

@@ -52,11 +52,11 @@ function CameraType() {
     }
     const changeColorindoor=()=>{
       
-      if (colorin==="orange"){
+      if (colorin==="black"){
         setcolorin("grey")
       }
       else{
-        setcolorin("orange")
+        setcolorin("black")
         setcolorout("grey")
         setcolorothers("grey")
       }
@@ -98,7 +98,7 @@ function CameraType() {
         <form action="">
           <Row>
             <Col lg={12}>
-              <div>
+              <div className='img-fluid shadow-4-strong'>
                 <label htmlFor="name"> Frame Name</label>
                 <input type="text" className='form-control' placeholder='Enter Unique Name' />
               </div>

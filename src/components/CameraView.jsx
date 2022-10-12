@@ -1,26 +1,97 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import CameraAdd from './CameraAdd'
 
 function CameraView() {
-    const ip=["11","22","33","333"]
+    //const ip=["11","22","33","333"]
+    const [ip,setip]=useState()
+    const [motion,setmotion]=useState("cam")
+    const [feedtype,setfeedtype]=useState("View Motion Detection")
+    const [colormotion,setcolormotion]=useState("white")
+    const [colorfeed,setcolorfeed]=useState("black")
+    const showlive=()=>{
+      if (motion=="camm"){
+        setmotion("cam")
+        setfeedtype("View Live Feed")
+      }
+      else{
+        setmotion("camm")
+        setfeedtype("View Motion Detection")
+      }
+      console.log("motion is "+motion)
+    }
+
+
+    useEffect(()=>{
+      console.log("wwwww")
+      fetch(`/video_feed/getemp`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(data => {
+          console.log("dataaaa")
+            setip(data)
+            console.log('ip', ip[1].camera_ip)
+        })
+        .catch(err => console.log(err))
+    },[ip])
+    const [isHover, setIsHover] = useState(false);
+
+    const handleMouseEnter = () => {
+       setIsHover(true);
+    };
+ 
+    const handleMouseLeave = () => {
+       setIsHover(false);
+    };
+ 
+    const boxStyle = {
+       backgroundColor:"black", borderRadius: "25px",
+       padding:"12px",      
+       display: 'flex',
+       justifyContent: 'center',
+       alignItems: 'center',
+     
+       cursor: 'pointer',
+       backgroundColor: isHover ?  'black':'white' ,
+       color: isHover ?   'white':'black',
+    };
   return (
 
       <div className="container my-5">
         <div className='row'>
+          <div className='col-md-10'>
+          <button onClick={showlive} style={boxStyle} onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>{feedtype}</button></div>
+          <div className='col'>
+          <CameraAdd/>
+          </div>
+        </div>
+
     
-        {ip?.map(x=> <div className="card col-md-6 my-3 mx-4" style={{width: "18rem"}}>
-          
-        {/* <button onClick={handleSubmit}>Submit</button> */}
+        <div className='row'>
+    
+{/* {ip?.map(x=> <div className="card col-md-6 my-3 mx-4" style={{backgroundColor:"white",boxshadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",justifyContent:"center",alignItems:"center"}}>
+            */}{ip?.map(x=><img className='my-2 mx-2' style={{borderRadius:"25px",width: "28rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
+    src={`http://localhost:8000/video_feed/${motion}/${x.camera_ip}`}
+    alt="Video" 
+   />)}
+         {/* <button >Submit</button>  */}
         {/* {ip1.map(x=><h1 key={x.camera}>{x.camera}</h1>)} */}
 
-         
+
+
+      {/* </div>)} */} 
+{/*          <div className="card col-md-6 my-3 mx-4" style={{width: "18rem"}}>
         <img
-    src={`http://localhost:8000/video_feed/cam/${x.camera}`}
-    alt="There is a Problem while fetching the live feed from the server" style={{height:"auto",width:"auto",borderRadius:"10%",boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px"}}
-   />
-   
+    src={`http://localhost:8000/video_feed/${motion}/${108}`}
+    alt="Video"
+   />  
+</div> */}
 
 
-   </div>)}
    </div>
 {/* {        <iframe width="auto" height="auto"
         src="https://www.youtube.com/embed/tgbNymZ7vqY">
@@ -32,7 +103,9 @@ function CameraView() {
    /> */}
        
         </div>
-
+/* {
+"camera_ip": "108"
+} */
   )
 }
 

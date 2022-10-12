@@ -1,7 +1,12 @@
-import React from "react";
+import React,{useState} from "react";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import {motion} from 'framer-motion';
+import { BiMale, BiFemale } from "react-icons/bi";
+import { MdDoNotDisturbOnTotalSilence } from "react-icons/md";
+import { AiOutlinePercentage } from "react-icons/ai";
+import { TbSum } from "react-icons/tb";
+
 const labels = ["0", "1", "2", "3", "4", "5"];
 
 const data = {
@@ -15,14 +20,19 @@ const data = {
     },
     {
         label: "Person Visits",
-        backgroundColor: "rgb(91, 24, 209)",
-        borderColor: "rgb(116, 49, 236)",
+        backgroundColor: "cyan",
+        borderColor: "cyan",
         data: [10, 0, 15, 22, 2, 13, 15],
       },
   ],
 };
 
 const LineChart = () => {
+  const colormale='5b18d1'
+  const colorfemale='ff6384'
+  const colortotal='8ed118'
+  const colorunidentify='orange'
+  const coloraccuracy='cyan'
     const options={
         plugins:{
         title: {
@@ -91,6 +101,7 @@ const LineChart = () => {
           whileTap={{
             scale:0.9
           }}>
+            <BiMale color={colormale}/>
             <text>male</text>
             <h6>20</h6></motion.div>
 
@@ -114,6 +125,7 @@ const LineChart = () => {
             whileTap={{
               scale:0.9
             }}>
+              <BiFemale color={colorfemale}/>
             <text>Female</text>
             <h6>20</h6></motion.div>
             
@@ -137,6 +149,7 @@ const LineChart = () => {
             whileTap={{
               scale:0.9
             }}>
+              <TbSum color={colortotal}/>
             <text>Total Person</text>
             <h6>40</h6></motion.div>
 
@@ -160,6 +173,7 @@ const LineChart = () => {
             whileTap={{
               scale:0.9
             }}>
+              <MdDoNotDisturbOnTotalSilence color={colorunidentify}/>
             <text>Unidentifiable</text>
             <h6>5</h6></motion.div>
 
@@ -184,6 +198,7 @@ const LineChart = () => {
             whileTap={{
               scale:0.9
             }}>
+              <AiOutlinePercentage color={coloraccuracy}/>
             <motiontext>Accuracy</motiontext>
             <h6>20%</h6></motion.div>
 

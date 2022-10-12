@@ -118,6 +118,7 @@ main {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 a {
  text-decoration: none; 
@@ -140,11 +141,15 @@ main {
 .sidebar {
   background:#363740;
   color: white;
- 
-  overflow-y: auto;
-  position: sticky;
-  height: 100vh; 
+  /* overflow-y: auto; */
+  
+  height: 100vh;
+  min-height: 800px; 
+
 }
+.sticky {
+  position: sticky;
+  top: 0;}
 
 .top_section {
   display: flex;
@@ -233,7 +238,18 @@ main {
   border-bottom: rgb(149, 145, 145) 0.5px solid;
 }
 
+.click {
+  width: 300px;
+  background: white;
+  font-size: 40px;
+  margin: 100px auto;
+  padding: 10px;
+  cursor: pointer;
+}
 
+.click:hover {
+  background: palegreen;
+}
 
 
 
