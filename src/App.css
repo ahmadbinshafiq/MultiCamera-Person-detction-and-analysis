@@ -114,7 +114,7 @@ main {
   border-bottom: rgb(14, 13, 13) 0.5px solid;
 }*/
 
-* {
+/* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -141,10 +141,10 @@ main {
 .sidebar {
   background:#363740;
   color: white;
-  /* overflow-y: auto; */
+ 
   
   height: 100vh;
-  min-height: 800px; 
+  min-height: 1200px; 
 
 }
 .sticky {
@@ -249,7 +249,144 @@ main {
 
 .click:hover {
   background: palegreen;
+}*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
 }
+a {
+ text-decoration: none; 
+ 
+}
+.main-container {
+  display: flex;
+}
+main {
+  padding: 10px;
+}
+
+.title {
+  font-size: 3rem;
+  display: grid;
+  place-items: center;
+}
+
+
+.sidebar {
+  background:white;
+  color: #E02323;
+  /* overflow-y: auto; */
+  
+  height: 100vh;
+  min-height: 1200px; 
+
+}
+.sticky {
+  position: sticky;
+  top: 0;}
+
+.top_section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px;
+  padding-top: 15px;
+}
+.logo {
+  font-size: 18px;
+  line-height: 0;
+  font-style: italic;
+}
+.bars {
+  width: 30px;
+}
+.hide {
+  display: none;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  height: 30px;
+  padding: 10px;
+}
+.search input {
+  border: none;
+  margin-left: 10px;
+  border-radius: 5px;
+  background:white;
+
+  color: #E02323;
+}
+
+.routes {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.link {
+  display: flex;
+  color: #808080;
+  gap: 10px;
+  padding: 5px 10px;
+  border-right: 4px solid transparent;
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+.link:hover {
+  border-right: 4px solid #E02323;
+  background: rgb(252, 171, 171);
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  color: #E02323;
+}
+.active {
+  border-right: 4px solid #E02323;
+  background: white;
+  color:#E02323
+}
+.link_text {
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.menu {
+  display: flex;
+  color: #808080;
+
+  padding: 5px 10px;
+  border-right: 4px solid transparent;
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  justify-content: space-between;
+}
+.menu_item {
+  display: flex;
+  gap: 10px;
+}
+.menu_container {
+  display: flex;
+  flex-direction: column;
+}
+.menu_container .link {
+  padding-left: 20px;
+  border-bottom: white solid;
+}
+
+.click {
+  width: 300px;
+  background: white;
+  font-size: 40px;
+  margin: 100px auto;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.click:hover {
+  background: rgb(252, 171, 171);
+}
+
 
 
 
