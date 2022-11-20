@@ -1,6 +1,5 @@
 import databases
 import sqlalchemy
-from asyncpg import UndefinedColumnError
 
 from . import models
 import cfg
@@ -23,17 +22,3 @@ class Database:
 
     async def disconnect(self):
         await self.db.disconnect()
-
-    async def fetch_all(self):
-        query = self.users.select()
-        return await self.db.fetch_all(query)
-
-    async def fetch_all_cameras(self):
-        query = self.cameras.select()
-        return await self.db.fetch_all(query)
-
-    async def add_user(self, user):
-        query = self.users.insert().values(user)
-        return await self.db.execute(query)
-
-
