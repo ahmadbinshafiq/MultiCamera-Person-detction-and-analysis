@@ -61,6 +61,7 @@ function CameraAdd() {
               .then(res => res.json())
     
               .catch(err => console.log(err))
+              setmodal(false)
       }
         const changeColorcctv=()=>{
           

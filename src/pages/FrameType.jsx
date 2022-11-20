@@ -1,5 +1,10 @@
 import React,{ useState }  from 'react';
 import {motion} from 'framer-motion';
+import Linechart from "../components/Linechart";
+import ComputationalCostFrame from "../components/ComputationalCostFrame";
+import ComputationalCost from "../components/ComputationalCost";
+import CameraView from "../components/CameraView";
+import { FaCircle } from "react-icons/fa";
 import {link} from 'react-router-dom';
 import { BiCctv } from "react-icons/bi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
@@ -22,6 +27,7 @@ function CameraType() {
     const [colorin,setcolorin]=useState("grey");
     const [colorout,setcolorout]=useState("grey");
     const [colorothers,setcolorothers]=useState("grey");
+    const [colorcircle,setcolorcircle]=useState("#800000");
 
     const handleSubmit = (event) => {
       console.log('Called handleSubmit')
@@ -41,15 +47,7 @@ function CameraType() {
 
           .catch(err => console.log(err))
   }
-    const changeColorcctv=()=>{
-      
-      if (colorcctv==="orange"){
-        setcolorcctv("grey")
-      }
-      else{
-        setcolorcctv("orange")
-      }
-    }
+
     const changeColorindoor=()=>{
       
       if (colorin==="black"){
@@ -63,34 +61,73 @@ function CameraType() {
     }
     const changeColoroutdoor=()=>{
      
-      if (colorout==="orange"){
+      if (colorout==="black"){
         setcolorout("grey")
       }
       else{
-        setcolorout("orange")
+        setcolorout("black")
         setcolorin("grey")
         setcolorothers("grey")
       }
     }
     const changeColorothers=()=>{
      
-      if (colorothers==="orange"){
+      if (colorothers==="black"){
         setcolorothers("grey")
       }
       else{
-        setcolorothers("orange")
+        setcolorothers("black")
         setcolorin("grey")
         setcolorout("grey")
       }
     }
-    const addframe=()=>{
+    const changemodal=()=>{
 
         setmodal(true)
       
     }
+    const [isHover, setIsHover] = useState(false);
+
+    const handleMouseEnter = () => {
+       setIsHover(true);
+    };
+ 
+    const handleMouseLeave = () => {
+       setIsHover(false);
+    };
+ 
+    const boxStyle = {
+       backgroundColor:"black", borderRadius: "15px",
+       padding:"3px",      
+       display: 'flex',
+       justifyContent: 'center',
+       alignItems: 'center',     
+       cursor: 'pointer',
+       backgroundColor: isHover ?  'black':'white' ,
+       color: isHover ?   'white':'black',
+    };
   return (
     <>
-    <Modal size="lg" isOpen={modal} toggle={()=>setmodal(!modal)}>
+
+    <div className="conatiner" >
+      <div style={{color:"#F7F8FC"}} ><h1>ffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhjjjjjjjjjjjjjjjjjjjjjjjjjj</h1></div>
+    </div>
+    <div>
+      <div className='container'>
+      <div className='row'>
+        <h6 className='col-md-1'>Computational Cost</h6>
+        <FaCircle className='col-md-1' size={12} color={colorcircle}/>
+      </div>
+      <ComputationalCostFrame/>
+      </div>
+      </div>
+      
+      {/* <CameraAdd/> */}
+      
+
+      {/* <Footer/> */}
+   
+      <Modal size="lg" isOpen={modal} toggle={()=>setmodal(!modal)}>
       <ModalHeader toggle={()=>setmodal(!modal)}>
         Fill the Required Information
       </ModalHeader>
@@ -139,74 +176,10 @@ function CameraType() {
         </form>
       </ModalBody>
     </Modal>
-        <motion.h1 
-        animate={{
-          x:100,
-          
-        }}
-        initial={{
-          x:0
-        }}
-        transition={{
-          type:"spring",
-          stiffness:60
-        }}>
-            Please select the type of Camera
-        </motion.h1>
-        <div class ="container">
-          <div class="row" style={{marginTop:"150px"}}>
-          {ip2?.map(x=><motion.div className="card" style={{width:"20rem",borderColor:"2px solid black",backgroundColor:"rgba(0,0,0,0.4)",marginLeft:"70px",marginBottom:"70px"}} 
-                          animate={{
-                            x:200,
-                            rotate:360
-                          }}
-                          initial={{
-                            x:0
-                            
-                          }}
-                          transition={{
-                            type:"spring",
-                            stiffness:60
-                          }}
-                          whileHover={{
-                            scale:1.1
-                            
-                          }}
-                          whileTap={{
-                            scale:0.9
-                          }}>
-                <div class="col" style={{marginLeft:"15px"}}>
-                  <BiCctv size="15rem" color={colorcctv} onClick={changeColorcctv}/>   
-              </div>
-              <h5 class="card-title">Frame</h5>
-            </motion.div>)}
-            <motion.div className="card" style={{width:"20rem",borderColor:"2px solid black",backgroundColor:"rgba(0,0,0,0.4)",marginLeft:"70px",marginBottom:"70px"}} 
-                          animate={{
-                            x:200,
-                            rotate:360
-                          }}
-                          initial={{
-                            x:0
-                            
-                          }}
-                          transition={{
-                            type:"spring",
-                            stiffness:60
-                          }}
-                          whileHover={{
-                            scale:1.1
-                            
-                          }}
-                          whileTap={{
-                            scale:0.9
-                          }}>
-                <div class="col" style={{marginLeft:"15px"}}>
-                  <AiOutlinePlusCircle size="15rem" color={colorcctv} onClick={addframe}/>   
-              </div>
-              <h5 class="card-title" style={{alignItems:"center"}}>Add New Frame</h5>
-            </motion.div>
-            
-          </div>
+<div style={{margin:"15px",float:"right"}}>
+        <button size="3rem"  onClick={changemodal} onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave} style={boxStyle}>
+        Add Frame</button> 
         </div>
 
     </>

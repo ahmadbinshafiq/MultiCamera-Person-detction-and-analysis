@@ -4,7 +4,7 @@ import { BsCpuFill } from "react-icons/bs";
 import { FiCpu } from "react-icons/fi";
 import { TbDeviceComputerCameraOff } from "react-icons/tb";
 import { HiOutlineVideoCamera,HiOutlineVideoCameraSlash } from "react-icons/hi";
-function ComputationalCost() {
+function ComputationalCostFrame() {
   const [colo,setcolo]=useState()
   const colorcpu='8ed118'
   const colorgpu='orange'
@@ -12,7 +12,7 @@ function ComputationalCost() {
   const colordefacted='red'
   return (
     <div className='container' style={{marginTop:"20px"}}>
-      <div className='row' style={{justifyContent: "center"}}>
+      <div className='row' style={{justifyContent: "left"}}>
       <motion.div className="col-md-2" style={{backgroundColor:"white",border: "1px solid lightgray",textAlign:"center"}}
       animate={{
         x:0,
@@ -133,4 +133,4 @@ function ComputationalCost() {
   )
 }
 
-export default ComputationalCost
+export default ComputationalCostFrame

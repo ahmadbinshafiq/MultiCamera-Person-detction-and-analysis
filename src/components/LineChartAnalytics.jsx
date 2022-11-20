@@ -140,7 +140,7 @@ const LineChartAnalytics = () => {
       <div className="col-md-2">
         <div className="row" style={{backgroundColor:"#FFFFFF",borderRadius:"5%"}}>
         <h1 style={{color:"gray", fontFamily:"Garamond"}}>Analysis</h1>
-          <motion.div style={{padding:"13px",textAlign:"center"}}
+          <motion.div style={{padding:"13px",textAlign:"left"}}
           animate={{
             x:0,
             rotate:360
@@ -161,12 +161,12 @@ const LineChartAnalytics = () => {
             scale:0.9
           }}>
             <FaCircle size={28} color={colorothers}/>
-            <text>Others
+            <text style={{marginLeft:"6px"}}>Others
                 20
             </text>
             </motion.div>
 
-            <motion.div style={{padding:"13px",textAlign:"center"}}
+            <motion.div style={{padding:"13px",textAlign:"left"}}
           animate={{
             x:0,
             rotate:360
@@ -187,11 +187,11 @@ const LineChartAnalytics = () => {
             scale:0.9
           }}>
             <FaCircle size={28} color={colorfemale}/>
-            <text>Female
-                20
+            <text style={{marginLeft:"6px"}}>Female
+                20 
             </text>
             </motion.div>
-            <motion.div style={{padding:"13px",textAlign:"center"}}
+            <motion.div style={{padding:"13px",textAlign:"left"}}
           animate={{
             x:0,
             rotate:360
@@ -212,7 +212,7 @@ const LineChartAnalytics = () => {
             scale:0.9
           }}>
             <FaCircle size={28} color={colormale}/>
-            <text>Male
+            <text style={{marginLeft:"6px"}}>Male
                 20
             </text>
             </motion.div>     
@@ -221,7 +221,7 @@ const LineChartAnalytics = () => {
 <div className="col-md-2 mt-5">
         <div className="row" style={{backgroundColor:"#FFFFFF",borderRadius:"5%"}}>
         <h1 style={{color:"gray", fontFamily:"Garamond"}}>Analysis</h1>
-          <motion.div style={{padding:"13px",textAlign:"center"}}
+        <motion.div style={{padding:"13px",textAlign:"left"}}
           animate={{
             x:0,
             rotate:360
@@ -242,12 +242,12 @@ const LineChartAnalytics = () => {
             scale:0.9
           }}>
             <FaCircle size={28} color={colorothers}/>
-            <text>Others
+            <text style={{marginLeft:"6px"}}>Others
                 20
             </text>
             </motion.div>
 
-            <motion.div style={{padding:"13px",textAlign:"center"}}
+            <motion.div style={{padding:"13px",textAlign:"left"}}
           animate={{
             x:0,
             rotate:360
@@ -268,11 +268,11 @@ const LineChartAnalytics = () => {
             scale:0.9
           }}>
             <FaCircle size={28} color={colorfemale}/>
-            <text>Female
-                20
+            <text style={{marginLeft:"6px"}}>Female
+                20 
             </text>
             </motion.div>
-            <motion.div style={{padding:"13px",textAlign:"center"}}
+            <motion.div style={{padding:"13px",textAlign:"left"}}
           animate={{
             x:0,
             rotate:360
@@ -293,11 +293,10 @@ const LineChartAnalytics = () => {
             scale:0.9
           }}>
             <FaCircle size={28} color={colormale}/>
-            <text>Male
+            <text style={{marginLeft:"6px"}}>Male
                 20
             </text>
-            </motion.div>     
-        </div>
+            </motion.div></div>
       </div>
 <div className="col-md-5 mt-5">
       <motion.div 
