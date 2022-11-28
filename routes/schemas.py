@@ -12,9 +12,14 @@ class Camera(BaseModel):
     ip: str = None
     port: str = None
     typeof: str = None
+    protocol: str = None
     local_path: str = None
     floor_id: int
 
 
 class Floor(BaseModel):
     name: str
+
+
+class VideoId(BaseModel):
+    id: int

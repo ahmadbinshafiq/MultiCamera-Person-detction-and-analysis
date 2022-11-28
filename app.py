@@ -1,7 +1,7 @@
-from fastapi import FastAPI, HTTPException, status, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import users, cameras, floors
+from routes import users, cameras, floors, ml
 
 app = FastAPI(title="FYP", docs_url="/docs")
 
@@ -22,3 +22,5 @@ async def root():
 app.include_router(users.router)
 app.include_router(cameras.router)
 app.include_router(floors.router)
+app.include_router(ml.router)
+# app.include_router(videos.router)

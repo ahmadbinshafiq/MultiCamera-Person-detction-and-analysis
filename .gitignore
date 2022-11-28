@@ -1,3 +1,17 @@
 __pycache__
-data
 .idea
+.vscode
+weights
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# image files
+*.png
+*.jpg
+*.jpeg
+
+# video files
+*.mp4
+*.avi
+
