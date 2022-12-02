@@ -12,6 +12,8 @@ import { MdOutlineCameraIndoor } from "react-icons/md";
 import { MdCameraOutdoor } from "react-icons/md";
 import { MdOtherHouses } from "react-icons/md";
 import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
+import Messages from './Messages';
+import DonutFrame from '../components/DonutFrame';
 function CameraType() {
   const ip2=["11"]
   const buttonstyle = {
@@ -121,8 +123,8 @@ function CameraType() {
       <ComputationalCostFrame/>
       </div>
       </div>
-      
-      {/* <CameraAdd/> */}
+     
+      <Messages/>
       
 
       {/* <Footer/> */}
@@ -176,10 +178,10 @@ function CameraType() {
         </form>
       </ModalBody>
     </Modal>
-<div style={{margin:"15px",float:"right"}}>
-        <button size="3rem"  onClick={changemodal} onMouseEnter={handleMouseEnter}
+<div style={{float:"right"}}>
+      {/*   <button size="3rem"  onClick={changemodal} onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave} style={boxStyle}>
-        Add Frame</button> 
+        Add Frame</button>  */}
         </div>
 
     </>

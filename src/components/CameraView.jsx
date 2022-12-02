@@ -3,6 +3,7 @@ import CameraAdd from './CameraAdd'
 
 function CameraView() {
     //const ip=["11","22","33","333"]
+    const ip1=["1","2","3","4","5","6","7","8","9"]
     const [ip,setip]=useState()
     const [motion,setmotion]=useState("cam")
     const [feedtype,setfeedtype]=useState("View Motion Detection")
@@ -33,7 +34,7 @@ function CameraView() {
         .then(data => {
           console.log("dataaaa")
             setip(data)
-            console.log('ip', ip[1].camera_ip)
+            //console.log('ip', ip[1].camera_ip)
         })
         .catch(err => console.log(err))
     },[ip])
@@ -63,8 +64,8 @@ function CameraView() {
       <div className="container my-5">
         <div className='row'>
           <div className='col-md-10'>
-          <button onClick={showlive} style={boxStyle} onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}>{feedtype}</button></div>
+          {/* <button onClick={showlive} style={boxStyle} onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>{feedtype}</button> */}</div>
           <div className='col'>
           <CameraAdd/>
           </div>
@@ -74,10 +75,12 @@ function CameraView() {
         <div className='row'>
     
 {/* {ip?.map(x=> <div className="card col-md-6 my-3 mx-4" style={{backgroundColor:"white",boxshadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",justifyContent:"center",alignItems:"center"}}>
-            */}{ip?.map(x=><img className='my-2 mx-2' style={{borderRadius:"25px",width: "28rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
+            */}
+{/*             {ip?.map(x=><img className='my-2 mx-2' style={{borderRadius:"25px",width: "28rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
     src={`http://localhost:8000/video_feed/${motion}/${x.camera_ip}`}
     alt="Video" 
-   />)}
+   />)} */}
+       
          {/* <button >Submit</button>  */}
         {/* {ip1.map(x=><h1 key={x.camera}>{x.camera}</h1>)} */}
 

@@ -37,7 +37,7 @@ function ComputationalCost() {
         <BsCpuFill className='col-md-3 mt-3' color={colorcpu}/>
         <div className='col-md-6'>
         <text>CPU</text>
-        <h6>20</h6>
+        <h6>33%</h6>
         </div>
         </div>
       </motion.div>
@@ -66,7 +66,7 @@ function ComputationalCost() {
         <FiCpu className='col-md-3 mt-3' color={colorgpu}/>
         <div className='col-md-6'>
         <text>GPU</text>
-        <h6>20</h6>
+        <h6>47%</h6>
         </div>
         </div>
       </motion.div>
@@ -95,7 +95,7 @@ function ComputationalCost() {
         <HiOutlineVideoCamera className='col-md-3 mt-3' color={colorworking}/>
         <div className='col-md-6'>
         <text>Working</text>
-        <h6>24</h6>
+        <h6>4</h6>
         </div>
         </div>
       </motion.div>
@@ -124,7 +124,7 @@ function ComputationalCost() {
         <TbDeviceComputerCameraOff className='col-md-3 mt-3' color={colordefacted}/>
         <div className='col-md-6'>
         <text>Defacted</text>
-        <h6>3</h6>
+        <h6>0</h6>
         </div>
         </div>
       </motion.div>

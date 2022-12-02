@@ -7,6 +7,7 @@ import FrameType from "./pages/FrameType";
 import Analytics from "./pages/Analytics";
 import Cameras from "./pages/Cameras";
 import CameraType from "./pages/CameraType";
+import Messages from "./pages/Messages";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/cameras/frameview" element={<FrameType />} />
           <Route path="/messages" element={<FrameType />} />
           <Route path="/analytics" element={<Analytics />} />
-          <Route path="/saved" element={<CameraType />} />
+          <Route path="/saved" element={<Messages />} />
 
 
           <Route path="*" element={<> not found</>} />

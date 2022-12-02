@@ -13,13 +13,13 @@ const data = {
   labels: labels,
   datasets: [
     {
-      label: "Person Visits",
+      label: "Today",
       backgroundColor: "rgb(255, 99, 132)",
       borderColor: "rgb(255, 99, 132)",
       data: [0, 10, 5, 2, 20, 30, 45],
     },
     {
-        label: "Person Visits",
+        label: "yesterday",
         backgroundColor: "cyan",
         borderColor: "cyan",
         data: [10, 0, 15, 22, 2, 13, 15],

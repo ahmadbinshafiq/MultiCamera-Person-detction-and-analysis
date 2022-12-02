@@ -4,14 +4,36 @@ import {link} from 'react-router-dom';
 import { BiCctv } from "react-icons/bi";
 import { AiOutlineMobile } from "react-icons/ai";
 import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
+import { useFormik } from "formik";
+import { camSchema } from "./schemas";
+const initialValues = {
+  camname: "",
+  camip: "",
+  camport: "",
+ 
+};
 
 function CameraAdd() {
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  useFormik({
+    initialValues,
+    validationSchema: camSchema,
+    onSubmit: (values, action) => {
+      console.log(
+        "🚀 ~ file: Registration.jsx ~ line 11 ~ Registration ~ values",
+        values
+      );
+      /* const a=values
+      console.log(a) */
+      action.resetForm();
+      setmodal(false)
+    },
+  });
     const [modal,setmodal]=useState(false);
     const [colorcctv,setcolorcctv]=useState("grey");
     const [colormob,setcolormob]=useState("grey");
-    const [camname,setcamname]=useState("");
-    const [camip,setcamip]=useState("");
-    const [camport,setcamport]=useState("");
+
+
     const [isHover, setIsHover] = useState(false);
     const handleMouseEnter = () => {
        setIsHover(true);
@@ -21,19 +43,23 @@ function CameraAdd() {
        setIsHover(false);
     };
     const buttonstyle = {
-     borderRadius: "35px ",
-  
+     borderRadius: "25px ",
+        border:"red",
         padding:"5px",      
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         cursor: 'pointer',
-        backgroundColor: isHover ? '#8ed118':'white' ,
-        color: isHover ? 'black' : 'black',
+        backgroundColor: isHover ? '#f2f4ff':'#EDEFFF' ,
+        color: isHover ? '#bbc2f9' : '#bbc2f9',
       };
     const buttonstylesubmit = {
-         borderRadius: "12px",
-        padding:"5px",      
+         borderRadius: "18px",
+        marginTop:"13px",
+        paddingLeft:"10px",
+        paddingRight:"10px", 
+        paddingTop:"1px",    
+        paddingBottom:"2px", 
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -43,7 +69,7 @@ function CameraAdd() {
       };
 
     
-        const handleSubmit = (event) => {
+        /* const handleSubmit = (event) => {
           console.log('Called handleSubmit')
           console.log(camname)
           event.preventDefault()
@@ -62,7 +88,7 @@ function CameraAdd() {
     
               .catch(err => console.log(err))
               setmodal(false)
-      }
+      } */
         const changeColorcctv=()=>{
           
           if (colorcctv==="black"){
@@ -85,27 +111,6 @@ function CameraAdd() {
             setmodal(true)
           }
         }
-        const handleInputname=(event)=>{
-          const name=event.target.name
-          const value=event.target.value
-          console.log(name,value)
-          setcamname(event.target.value)
-          console.log(camname)
-        }
-        const handleInputip=(event)=>{
-          const name=event.target.name
-          const value=event.target.value
-          console.log(name,value)
-          setcamip(event.target.value) 
-          console.log("camip ",camip)
-        }
-        const handleInputport=(event)=>{
-          const name=event.target.name
-          const value=event.target.value
-          console.log(name,value)
-          setcamport(event.target.value) 
-          console.log("camport ",camport)
-        }
         const changemodal=()=>{
             setmodal(true)          
         }
@@ -117,18 +122,28 @@ function CameraAdd() {
         Fill the Required Information
       </ModalHeader>
       <ModalBody>
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <Row>
             <Col lg={12}>
               <div>
                 <label htmlFor="name"> Camera Name</label>
-                <input type="text" className='form-control' name={camname} placeholder='Enter Unique Name' onChange={handleInputname} />
+                <input type="text" className='form-control' name="camname" placeholder='Enter Unique Name' value={values.camname}
+                      onChange={handleChange}
+                      onBlur={handleBlur} />
+                      {errors.camname && touched.camname ? (
+                      <p className="form-error" style={{color:"red"}}>{errors.camname}</p>
+                    ) : null}
               </div>
             </Col>
             <Col lg={12}>
               <div>
                 <label htmlFor="name"> Camera Ip Address</label>
-                <input type="text" className='form-control' name={camip} placeholder='Enter Camera Ip Address' onChange={handleInputip}/>
+                <input type="text" className='form-control' name="camip" placeholder='Enter Camera Ip Address' value={values.camip}
+                      onChange={handleChange}
+                      onBlur={handleBlur}/>
+                      {errors.camip && touched.camip ? (
+                      <p className="form-error" style={{color:"red"}}>{errors.camip}</p>
+                    ) : null}
               </div>
             </Col>
             <Row style={{marginLeft:"2px"}}>  Type of frame</Row>
@@ -155,19 +170,24 @@ function CameraAdd() {
             <Col lg={12}>
               <div>
                 <label htmlFor="name"> Camera Port </label>
-                <input type="text" className='form-control' name={camport} placeholder='Enter Camera Port e.g 8080' onChange={handleInputport}/>
+                <input type="text" className='form-control' name="camport" placeholder='Enter Camera Port e.g 8080' value={values.camport}
+                      onChange={handleChange}
+                      onBlur={handleBlur}/>
+                      {errors.camport && touched.camport ? (
+                      <p className="form-error" style={{color:"red"}}>{errors.camport}</p>
+                    ) : null}
               </div>
             </Col>
             <Col>
-              <button style={buttonstylesubmit} onClick={handleSubmit}>Submit</button>
+              <button style={buttonstylesubmit} type="submit" onClick={handleSubmit}>Submit</button>
             </Col>
           </Row>
         </form>
       </ModalBody>
     </Modal>
     <button size="15rem"  onClick={changemodal} onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave} style={buttonstyle}>
-        Add Camera</button>   
+            onMouseLeave={handleMouseLeave}  style={buttonstyle}>
+        +Add Camera</button>   
               
     </>
   )

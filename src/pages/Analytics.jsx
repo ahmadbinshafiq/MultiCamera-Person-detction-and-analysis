@@ -4,7 +4,7 @@ const Analytics = () => {
     return( 
   <>
       <div style={{backgroundColor:"#F7F8FC"}} >
-    <div className="title"> Header Area</div>
+    <div className="title"> </div>
     
 
     <LineChartAnalytics />
