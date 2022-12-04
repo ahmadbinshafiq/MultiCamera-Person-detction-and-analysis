@@ -50,9 +50,7 @@ class Homography:
         :sets self.homography_matrix;
         """
         self._image_points = self._reshape_points_for_homography(self._image_points)
-        self._ground_truth_points = self._reshape_points_for_homography(
-            self._ground_truth_points
-        )
+        self._ground_truth_points = self._reshape_points_for_homography(self._ground_truth_points)
 
         homography_matrix, status = cv2.findHomography(
             np.array(self._image_points),
@@ -75,9 +73,10 @@ class Homography:
         :return: mapped_points
         """
 
+        print("initial points: ", points)
         src_points = np.reshape(points, (3, 1))
         mapped_points = np.dot(self._homography_matrix, src_points)
         mapped_points = mapped_points / mapped_points[2]
         mapped_points = np.reshape(mapped_points[:2], (1, 2))
-
+        print("end points: ", mapped_points)
         return mapped_points

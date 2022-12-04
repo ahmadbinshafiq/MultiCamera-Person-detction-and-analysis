@@ -31,5 +31,11 @@ HOMOGRAPHY_NPY_PATH = "media/homography_npy/"
 HEATMAP_NPY_PATH = "media/heatmap_npy/"
 SAVE_VIDEO_PATH = "media/videos/"
 HEATMAP_IMAGE_PATH = "media/heatmap_images/"
+TRACK_NPY_PATH = "media/local_storage/track_npy/"
+
+# image stitching config
+SKIP_FRAMES = 60  # skip frames for image stitching
+STITCHING_FRAMES_INTERVAL = 100  # stitch images every 10 frames
+SCALING_FACTOR = 0.5  # image scaling factor for image stitching
 
 

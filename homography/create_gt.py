@@ -23,4 +23,4 @@ def create_ground_truth_image(path, output_path):
 
 
 if __name__ == "__main__":
-    create_ground_truth_image("../heatmap/cui1.jpg", output_path="blank_image.jpg")
+    create_ground_truth_image("cui1.jpg", output_path="blank_image.jpg")

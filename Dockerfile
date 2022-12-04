@@ -9,13 +9,13 @@ RUN apt-get update && apt-get install -y  \
     libjpeg-dev libpng-dev libtiff-dev libgtk2.0-dev libatlas-base-dev gfortran webp zlib1g-dev
 
 # FastAPI dependencies
-RUN pip3 install fastapi uvicorn[standard] gunicorn asyncpg
+RUN pip3 install fastapi uvicorn[standard] gunicorn asyncpg python-multipart
 
 # Postgres dependencies
 RUN pip3 install databases[postgresql] psycopg2-binary
 
 # Extra Python dependencies
-RUN pip3 install pytz
+RUN pip3 install pytz imutils
 
 # YOLO dependencies
 RUN pip3 install gitpython
@@ -36,11 +36,19 @@ RUN pip3 install tensorboard>=2.4.1
 RUN pip3 install pandas>=1.1.4
 RUN pip3 install seaborn>=0.11.0
 
-# TensorRT dependencies
-RUN pip3 install nvidia-pyindex  # TensorRT export
-RUN pip3 install nvidia-tensorrt  # TensorRT export
+# StrongSORT dependencies
+RUN pip3 install easydict
 
-# Openvino dependencies
-RUN pip3 install openvino-dev  # OpenVINO export
+# torchreid -------------------------------------------------------------------
+RUN pip3 install gdown
 
-WORKDIR /app
+# ByteTrack -------------------------------------------------------------------
+RUN pip3 install lap
+RUN pip3 install git+https://github.com/samson-wang/cython_bbox.git@9badb346a9222c98f828ba45c63fe3b7f2790ea2
+
+# OCSORT ----------------------------------------------------------------------
+RUN pip3 install filterpy
+
+RUN pip3 install openvino-dev
+RUN pip3 install nvidia-pyindex
+RUN pip3 install nvidia-tensorrt

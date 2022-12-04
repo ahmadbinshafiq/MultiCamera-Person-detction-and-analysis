@@ -32,7 +32,7 @@ def counts(tracker):
             male_count += 1
         elif tracker[track][1] == 'FEMALE':
             female_count += 1
-        elif tracker[track] is None:
+        else:
             unknown_count += 1
 
         if tracker[track][0] is not None:

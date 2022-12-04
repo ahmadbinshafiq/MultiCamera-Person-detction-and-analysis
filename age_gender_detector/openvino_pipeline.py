@@ -46,6 +46,7 @@ class OpenVinoPipeline(ABC):
 
         :returns reshaped_image and resized_image
         """
+        # print(f"Original image shape: {image.shape}")
         resized_image = cv2.resize(image, (self.width, self.height))
         reshaped_image = np.expand_dims(
             resized_image.transpose(2, 0, 1), axis=0
