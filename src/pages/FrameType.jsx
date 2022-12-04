@@ -16,15 +16,27 @@ import Messages from './Messages';
 import DonutFrame from '../components/DonutFrame';
 function CameraType() {
   const ip2=["11"]
+  const [isHover, setIsHover] = useState(false);
   const buttonstyle = {
-    color: "white",
-    backgroundColor: "black",
-    fontFamily: "Arial",
-    padding: "10px 60px",
-    borderradius: "1px",
-    margin: "10px 0px",
+    borderRadius: "25px ",
+    border:"red",
+    padding:"5px",      
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer',
+    backgroundColor: isHover ? '#f2f4ff':'#EDEFFF' ,
+    color: isHover ? '#bbc2f9' : '#bbc2f9',
+  };
+  const buttonstyle2 = {
+    borderRadius: "25px ",
+    border:"0px",
+    padding:"5px",      
+    backgroundColor:"rgb(253,95,114,10%)"
+
   };
     const [modal,setmodal]=useState(false);
+    const [modal1,setmodal1]=useState(false);
     const [colorcctv,setcolorcctv]=useState("grey");
     const [colorin,setcolorin]=useState("grey");
     const [colorout,setcolorout]=useState("grey");
@@ -33,6 +45,8 @@ function CameraType() {
 
     const handleSubmit = (event) => {
       console.log('Called handleSubmit')
+      setmodal(!modal)
+      setmodal1(!modal1)
       event.preventDefault()
       fetch(`/video_feed/emp/`, {
           method: 'POST',
@@ -88,7 +102,7 @@ function CameraType() {
         setmodal(true)
       
     }
-    const [isHover, setIsHover] = useState(false);
+
 
     const handleMouseEnter = () => {
        setIsHover(true);
@@ -99,7 +113,7 @@ function CameraType() {
     };
  
     const boxStyle = {
-       backgroundColor:"black", borderRadius: "15px",
+       borderRadius: "15px",
        padding:"3px",      
        display: 'flex',
        justifyContent: 'center',
@@ -124,7 +138,7 @@ function CameraType() {
       </div>
       </div>
      
-      <Messages/>
+     
       
 
       {/* <Footer/> */}
@@ -172,18 +186,28 @@ function CameraType() {
             </Col>
             </Row>
             <Col>
-              <button style={buttonstyle} onClick={handleSubmit}>Submit</button>
+              <button style={boxStyle} onClick={handleSubmit}
+               onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave} >Submit</button>
             </Col>
           </Row>
         </form>
       </ModalBody>
     </Modal>
-<div style={{float:"right"}}>
-      {/*   <button size="3rem"  onClick={changemodal} onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave} style={boxStyle}>
-        Add Frame</button>  */}
-        </div>
-
+    <button className="mt-2" size="15rem"  onClick={changemodal} onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}  style={buttonstyle}>
+        +Add Frame</button> 
+        
+          <div className='col-md-6 mt-2' style={{justifyContent:"left",height:"10rem",backgroundColor:"rgb(253,95,114,10%)",width:"20rem"}}>
+           <div style={{paddingLeft:"15px"}}>
+            <p>Outdoor</p>
+            
+              <h1>Frame1</h1>
+            <h4>Cameras:2</h4>
+            </div>
+          </div>
+        
+        <Messages/>
     </>
   )
 }
