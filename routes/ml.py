@@ -25,7 +25,7 @@ async def test(response: Response):
 
 
 @router.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
+async def detect_and_track_feed(websocket: WebSocket):
     await websocket.accept()
     data = await websocket.receive_json()
     video_id = int(data['video_id'])
@@ -45,7 +45,7 @@ async def websocket_endpoint(websocket: WebSocket):
     video_name = video_name.split('.')[0]
 
     try:
-        await map_points.run(video_path, gt_path, npy_path, video_name, websocket)
+        await map_points.run(video_id, video_path, gt_path, npy_path, video_name, websocket, db)
     except WebSocketDisconnect:
         await websocket.close()
     except ConnectionClosedError:

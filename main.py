@@ -1,5 +1,8 @@
+from datetime import date, time, datetime
+
 import cv2
 import numpy as np
+from sqlalchemy import insert
 
 from cfg import *
 from heatmap.heatmap import MotionHeatmap
@@ -34,15 +37,13 @@ class TrackAndMapPointsUsingHomography(IOEventHandler, Homography, DetectNTrack,
         points_array = self.load_npy(npy_path)
         self.points = points_array
         self.compute_homography()
-        print(f'START H: {self._homography_matrix}')
+        # print(f'START H: {self._homography_matrix}')
 
     def map_centroids(self, centroids: list, shape: tuple):
         mapped_centroids = []
         for centroid in centroids:
             # upscaled_centroid = im.upscale_centroids(centroid, shape)
-            print(f'centroid before insertion: {centroid}')
             centroid.insert(2, 1)  # add 1 to the end of the list for matrix multiplication - 3x1 matrix
-            print(f'centroid after insertion: {centroid}')
             mapped_centroids.append(self.map_points(centroid))
         return mapped_centroids
 
@@ -54,20 +55,17 @@ class TrackAndMapPointsUsingHomography(IOEventHandler, Homography, DetectNTrack,
         :return:
             Frame with centroids plotted on it.
         """
-        # TODO: print the len of centroids for debugging
-        print(f"len of centroids: {len(centroids)}")
         # get the height and width of the frame
         height, width, _ = frame.shape
         for centroid in centroids:
             x, y = centroid[0].astype(int)
-            print(f"x: {x}, y: {y}")
             cv2.circle(frame, (x, y), CIRCLE_WIDTH, (0, 0, 255), -1)
         return frame
 
     async def run(self, *args):
         # TODO: give heatmap_image name, and npy_file name in the args
         if len(args) > 0:
-            video_path, gt_path, npy_path, npy_name, websocket = args[0], args[1], args[2], args[3], args[4]
+            camera_id, video_path, gt_path, npy_path, npy_name, websocket, db = args[0], args[1], args[2], args[3], args[4], args[5], args[6]
 
         self.homography(npy_path=npy_path)
         gt = cv2.imread(gt_path)
@@ -119,12 +117,40 @@ class TrackAndMapPointsUsingHomography(IOEventHandler, Homography, DetectNTrack,
                         new_age_tracker[int(track_id)] = [age, gender]
                         # print(f'Age: {age}, -- Gender: {gender}')
 
-                prev_age_tracker = compare_age_tracker(new_age_tracker, prev_age_tracker)
-                counts_dict = counts(prev_age_tracker)  # live counts of people, gender and age
-                print(f"counts_dict: {counts_dict}")
+                # get all the keys in the new tracker and the previous tracker
+                new_keys = list(new_age_tracker.keys())
+                prev_keys = list(prev_age_tracker.keys())
+                print(f'New keys: {new_keys} -- Prev keys: {prev_keys}')
+
+                # check if the prev tracker has any keys that are not in the new tracker
+                unique_keys = list(set(new_keys) - set(prev_keys))
+                if len(unique_keys) > 0:
+                    for key in unique_keys:
+                        key = int(key)
+                        print(f"pushing {key} - {new_age_tracker[key]} to db...")
+                        counts_for_db = counts({key: new_age_tracker[key]})
+                        del counts_for_db['total_people']
+                        print(f"data to be pushed to db: {counts_for_db}")
+                        query = insert(db.analytics).values(
+                            camera_id=camera_id,  # TODO: change this to the camera id
+                            date=date.today(),
+                            time=datetime.now().time(),
+                            males_count=counts_for_db['male_count'],
+                            females_count=counts_for_db['female_count'],
+                            unknown_count=counts_for_db['unknown_count'],
+                            child_count=counts_for_db['child_count'],
+                            teen_count=counts_for_db['teen_count'],
+                            adult_count=counts_for_db['adult_count'],
+                            elderly_count=counts_for_db['elderly_count']
+                        )
+                        await db.db.execute(query)
 
                 cv2.namedWindow('heatmap', cv2.WINDOW_NORMAL)
                 cv2.imshow('heatmap', heatmap)
+
+            prev_age_tracker = compare_age_tracker(new_age_tracker, prev_age_tracker)
+            counts_dict = counts(prev_age_tracker)  # live counts of people, gender and age
+            # print(f"counts_dict: {counts_dict}")
 
             # frame = cv2.warpPerspective(frame, self._homography_matrix, (frame.shape[1], frame.shape[0]))
             cv2.namedWindow('frame', cv2.WINDOW_NORMAL)

@@ -12,6 +12,7 @@ class Database:
         self.users = models.users_table
         self.floors = models.floors_table
         self.cameras = models.cameras_table
+        self.analytics = models.analytics_table
         self.engine = sqlalchemy.create_engine(
             cfg.connection_string, pool_size=3, max_overflow=0
         )

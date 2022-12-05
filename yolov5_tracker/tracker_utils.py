@@ -3,13 +3,6 @@ def compare_age_tracker(new_tracker, prev_tracker):
     new_keys = list(new_tracker.keys())
     prev_keys = list(prev_tracker.keys())
 
-    # check if the prev tracker has any keys that are not in the new tracker
-    # TODO: take this code into the main
-    unique_keys = list(set(prev_keys) - set(new_keys))
-    if len(unique_keys) > 0:
-        for key in unique_keys:
-            print(f"pushing {key} - {prev_tracker[key]} to db...")  # push this key value pair to the database
-
     # check if the new tracker has any keys which values are different from the previous tracker
     for key in new_keys:
         if key in prev_keys:

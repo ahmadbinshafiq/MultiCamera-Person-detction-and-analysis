@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import users, cameras, floors, ml
+from routes import users, cameras, floors, ml, analytics
 
 app = FastAPI(title="FYP", docs_url="/docs")
 
@@ -23,4 +23,4 @@ app.include_router(users.router)
 app.include_router(cameras.router)
 app.include_router(floors.router)
 app.include_router(ml.router)
-# app.include_router(videos.router)
+app.include_router(analytics.router)

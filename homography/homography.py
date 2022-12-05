@@ -73,10 +73,9 @@ class Homography:
         :return: mapped_points
         """
 
-        print("initial points: ", points)
         src_points = np.reshape(points, (3, 1))
         mapped_points = np.dot(self._homography_matrix, src_points)
         mapped_points = mapped_points / mapped_points[2]
         mapped_points = np.reshape(mapped_points[:2], (1, 2))
-        print("end points: ", mapped_points)
+
         return mapped_points

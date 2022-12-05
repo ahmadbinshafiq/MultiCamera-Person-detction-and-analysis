@@ -1,4 +1,4 @@
-from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey
+from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey, Boolean, DateTime, Float, Date, Time
 from sqlalchemy.orm import relationship
 
 metadata = MetaData()
@@ -33,3 +33,20 @@ floors_table = Table(
     Column("id", Integer, primary_key=True),
     Column("name", String, unique=True, nullable=False),
 )
+
+analytics_table = Table(
+    "analytics",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("camera_id", Integer, ForeignKey("cameras.id")),
+    Column("date", Date, nullable=True),
+    Column("time", Time, nullable=True),
+    Column("males_count", Integer, nullable=True),
+    Column("females_count", Integer, nullable=True),
+    Column("unknown_count", Integer, nullable=True),
+    Column("child_count", Integer, nullable=True),
+    Column("teen_count", Integer, nullable=True),
+    Column("adult_count", Integer, nullable=True),
+    Column("elderly_count", Integer, nullable=True),
+)
+

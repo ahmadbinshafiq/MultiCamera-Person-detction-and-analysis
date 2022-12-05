@@ -1,3 +1,5 @@
+from typing import Union
+
 from pydantic import BaseModel
 
 
@@ -23,3 +25,11 @@ class Floor(BaseModel):
 
 class VideoId(BaseModel):
     id: int
+
+
+class IntervalAnalytics(BaseModel):
+    camera_id: Union[int, None] = None
+    date_start: str
+    date_end: str
+    time_start: Union[str, None] = None
+    time_end: Union[str, None] = None
