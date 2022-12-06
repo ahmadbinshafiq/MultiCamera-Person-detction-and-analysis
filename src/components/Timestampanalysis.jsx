@@ -5,7 +5,9 @@ import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
 import AsyncSelect from "react-select/async";
 import DatePicker from 'react-datepicker'; 
 import timepicker from 'react-time-picker';  
-import "react-datepicker/dist/react-datepicker.css";   
+import "react-datepicker/dist/react-datepicker.css"; 
+import TimePicker from "rc-time-picker";
+import 'rc-time-picker/assets/index.css';  
 const labels = ["0", "1", "2", "3", "4", "5"];
 const labels2 = ["Others", "Female", "Male"];
 
@@ -30,13 +32,8 @@ const data = {
 };
 
 
-export default function Filters() {
-  const data5 = {
-    "date_start": "2022-12-05",
-    "date_end": "2022-12-06",
-    "time_start": "02:00:00",
-    "time_end": "23:00:59"
-}
+export default function Timestampanalysis() {
+
     const options2 = {
       type: 'bar',
       data: data,
@@ -62,14 +59,18 @@ export default function Filters() {
     const [male2, setmale2] = React.useState("12");
     const [female2, setfemale2] = React.useState("16");
     const [others2, setothers2] = React.useState("75");
-    const [dateopt,setdateopt]=React.useState([{}]);
-    const [dateopt1,setdateopt1]=React.useState([{}]);
+    const [dateTo,setdateTo]=React.useState();
+    const [dateFrom,setdateFrom]=React.useState();
     const [startdate1,setstartdate1]=React.useState(new Date);
     const [enddate1,setenddate1]=React.useState(new Date);
-    const [dayfirst,setdayfirst]=React.useState();
-    const [daysecond,setdaysecond]=React.useState();
-    const [timeStamp1,settimeStamp1]=React.useState("2");
-    const [timeStamp2,settimeStamp2]=React.useState();
+    const [timeFrom,settimeFrom]=React.useState();
+    const [timeTo,settimeTo]=React.useState();
+    const data5 = {
+      "date_start": dateTo,
+      "date_end": dateFrom,
+      "time_start": timeFrom,
+      "time_end": timeTo
+  }
     const data1 = {
       labels: [
         'female',
@@ -123,18 +124,7 @@ export default function Filters() {
           
         }]
       };
-    const loadOptions=(searchValue,callback)=>{
-      setTimeout(()=>{
-        const filterOption=dateopt.filter(option=>option.label.toLowerCase().includes(searchValue.toLowerCase()))
-      callback(filterOption)
-      },2000)
-    }
-    const loadOptions1=(searchValue,callback)=>{
-      setTimeout(()=>{
-        const filterOption=dateopt1.filter(option=>option.label.toLowerCase().includes(searchValue.toLowerCase()))
-      callback(filterOption)
-      },2000)
-    }
+
 
     
 /*     React.useEffect(()=>{
@@ -190,6 +180,7 @@ export default function Filters() {
         }
       const changemodal1=()=>{
         console.log("wwwww")
+        console.log("data5 is",data5)
         setmodal(!modal) 
         fetch(`/analytics/timestamp_based_analytics_per_day`, {
           method: 'POST',
@@ -226,26 +217,7 @@ export default function Filters() {
           .catch(err => console.log(err)) */
         
 
-    const handlechange1=(selectedOption)=>{
-      console.log("handlechange1",selectedOption)
-      setdayfirst(selectedOption)
-    }
-    const handlechange2=(selectedOption)=>{
-      console.log("handlechange2",selectedOption)
-      setdaysecond(selectedOption)
-    }
-    const handlechange3=(selectedOption)=>{
-      console.log("handlechange3",selectedOption)
-      settimeStamp1(selectedOption.value)
-      console.log("handlechange3",selectedOption.value)
-      //var timeStamp1=timeStamp
-      //console.log("handlechange3 timestamp",timeStamp1)
-      //here we add filter options in state
-    }
-    const handlechange4=(selectedOption)=>{
-      console.log("handlechange4",selectedOption)
-      settimeStamp2(selectedOption.value)
-    }
+   
 
   
   return (
@@ -255,109 +227,164 @@ export default function Filters() {
             onMouseLeave={handleMouseLeave}  style={buttonstyle}>
         +Add Filters</button> 
       </div>
-  <div className="col-md-4 mt-2">
-      <motion.div 
-      animate={{
-        x:0,
-        rotate:360
+      <div className="col-md-4 mt-2">
+          <motion.div 
+          animate={{
+            x:0,
+            rotate:360
 
-      }}
-      initial={{
-        x:200
-        
-      }}
-      transition={{
-        type:"spring",
-        stiffness:60
-      }}
-      whileHover={{
-        scale:1.01
-        
-      }}
-      whileTap={{
-        scale:0.9
-      }}>
-        <Doughnut data={data1} options={{responsive: true,
-          maintainAspectRatio: false}} style={{backgroundColor:"#FFFFFF",borderRadius:"5%",height:"300px"}}/>
-      </motion.div>
-</div>
-<div className="col-md-4 mt-2">
-      <motion.div 
-      animate={{
-        x:0,
-        rotate:360
+          }}
+          initial={{
+            x:200
+            
+          }}
+          transition={{
+            type:"spring",
+            stiffness:60
+          }}
+          whileHover={{
+            scale:1.01
+            
+          }}
+          whileTap={{
+            scale:0.9
+          }}>
+            <Doughnut data={data1} options={{responsive: true,
+              maintainAspectRatio: false}} style={{backgroundColor:"#FFFFFF",borderRadius:"5%",height:"300px"}}/>
+          </motion.div>
+      </div>
+      <div className="col-md-4 mt-2">
+            <motion.div 
+            animate={{
+              x:0,
+              rotate:360
 
-      }}
-      initial={{
-        x:200
-        
-      }}
-      transition={{
-        type:"spring",
-        stiffness:60
-      }}
-      whileHover={{
-        scale:1.01
-        
-      }}
-      whileTap={{
-        scale:0.9
-      }}>
-        <Doughnut data={data3} options={{responsive: true,
-          maintainAspectRatio: false}} style={{backgroundColor:"#FFFFFF",borderRadius:"5%",height:"300px"}}/>
-      </motion.div>
-</div>
-<div className="col-md-4 mt-2">
-      <motion.div 
-      animate={{
-        x:0,
-        rotate:360
+            }}
+            initial={{
+              x:200
+              
+            }}
+            transition={{
+              type:"spring",
+              stiffness:60
+            }}
+            whileHover={{
+              scale:1.01
+              
+            }}
+            whileTap={{
+              scale:0.9
+            }}>
+              <Doughnut data={data3} options={{responsive: true,
+                maintainAspectRatio: false}} style={{backgroundColor:"#FFFFFF",borderRadius:"5%",height:"300px"}}/>
+            </motion.div>
+      </div>
+      <div className="col-md-4 mt-2">
+            <motion.div 
+            animate={{
+              x:0,
+              rotate:360
 
-      }}
-      initial={{
-        x:200
-        
-      }}
-      transition={{
-        type:"spring",
-        stiffness:60
-      }}
-      whileHover={{
-        scale:1.01
-        
-      }}
-      whileTap={{
-        scale:0.9
-      }}>
-        <Bar data={data2} options={{options2}} style={{backgroundColor:"#FFFFFF",borderRadius:"5%",height:"300px"}}/>
-      </motion.div>
-</div>
+            }}
+            initial={{
+              x:200
+              
+            }}
+            transition={{
+              type:"spring",
+              stiffness:60
+            }}
+            whileHover={{
+              scale:1.01
+              
+            }}
+            whileTap={{
+              scale:0.9
+            }}>
+              <Bar data={data2} options={{options2}} style={{backgroundColor:"#FFFFFF",borderRadius:"5%",height:"300px"}}/>
+            </motion.div>
+      </div>
 
 
     <Modal size="lg" isOpen={modal} toggle={()=>setmodal(!modal)}>
       <ModalHeader toggle={()=>setmodal(!modal)}>
         Add Filters
       </ModalHeader>
-      <ModalBody>
-      
-          
-            <Row style={{marginLeft:"2px"}}>Select Date From </Row>
-            <Row>          <DatePicker  
+      <ModalBody>       
+          <Row style={{marginLeft:"1px"}}>Select Date From </Row>
+            <Row style={{marginLeft:"4px"}}>          
+              <DatePicker  
               selected={ startdate1 }  
-              onChange={ date =>setstartdate1(date) }  
+              onChange={ date =>{
+                setstartdate1(date)
+                console.log("printing date:", date.toISOString().substring(0, 10))
+                console.log("printing date type:", typeof date.toISOString().substring(0, 10))
+                var date1=date.toISOString().substring(0, 10)
+                setdateFrom(date1)
+              } }    
               name="From Date"  
               dateFormat="yyyy-MM-dd"  
           /> </Row> 
-          <Row style={{marginLeft:"2px"}}>Select Date To </Row>
-            <Row>          <DatePicker  
+            
+          <Row style={{marginLeft:"1px"}}>Select Date To </Row>
+            <Row style={{marginLeft:"4px"}}>          
+              <DatePicker  
               selected={ enddate1 }  
-              onChange={ date =>setenddate1(date) }  
+              onChange={ date =>{
+                setenddate1(date)
+                console.log("printing date:", date.toISOString().substring(0, 10))
+                console.log("printing date type:", typeof date.toISOString().substring(0, 10))
+                var date1=date.toISOString().substring(0, 10)
+                setdateTo(date1)
+              } }     
               name="To Date"  
               dateFormat="yyyy-MM-dd"  
-          /> </Row>           
-            <Row style={{marginLeft:"2px"}} >From(TimeStamp)</Row>
-              <Row style={{marginLeft:"2px"}} >To(TimeStamp)</Row>
-            <Row><AsyncSelect loadOptions={loadOptions1} onChange={handlechange4}/></Row>
+            /> </Row>
+
+            <Row>
+              <br />
+              <p>From(TimeStamp): {timeFrom || '-'}</p>
+              <TimePicker
+                  placeholder="Select Time"
+                  showSeconds
+                  focusOnOpen={true}
+                  format="hh:mm:ss"
+                  onChange={e => 
+                    { settimeFrom(e.toISOString().substring(0, 10))
+                      var time1=e.format('LTS')
+                      var time2=time1.substring (0, time1.length - 3);
+                      //time2+=":01"
+                      settimeFrom(time2)
+                      console.log("time selected is --", e.toISOString())
+                      console.log("time 2 is", time2)}
+                  }
+              /></Row>
+
+
+            <Row>
+              <br />
+              <p>To(TimeStamp): {timeTo || '-'}</p>
+              <TimePicker
+                  placeholder="Select Time"
+                  showSeconds
+                  focusOnOpen={true}
+                  format="hh:mm:ss"
+                  onChange={e => 
+                    { 
+                      //console.log("time selected is ",typeof e)
+                      //console.log("time selected is ", e.format('LT'))
+                      //console.log("time selected is -", timeTo)
+                      var time1=e.format('LTS')
+                      var time2=time1.substring (0, time1.length - 3);
+                      //time2+=":01"
+                      settimeTo(time2)
+                      console.log("time selected is --", e.toISOString())
+                      console.log("time 2 is", time2)
+                      //console.log("time selected is --", e.toISOString().substring(11, 16))
+                    }
+                  }
+            /></Row>
+
             <Col className="mt-2">
               <button onClick={changemodal1} type="submit" onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}  style={buttonstyle1} >Apply</button>

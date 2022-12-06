@@ -5,8 +5,6 @@ const Analytics = () => {
   <>
       <div style={{backgroundColor:"#F7F8FC"}} >
     <div className="title"> </div>
-    
-
     <LineChartAnalytics />
     
     </div>

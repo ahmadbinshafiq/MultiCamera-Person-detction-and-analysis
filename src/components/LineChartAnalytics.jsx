@@ -3,25 +3,25 @@ import { Line,Bar,Doughnut,Pie } from "react-chartjs-2";
 import {motion} from 'framer-motion';
 import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
 import { FaCircle } from "react-icons/fa";
-import Filters from "./Filters";
+import Timestampanalysis from "./Timestampanalysis";
 import DatePicker from "react-datepicker";
-
-
-
-
 
 const LineChartAnalytics = () => {
   const colorothers='FFD66B'
   const colorfemale='B880FF'
   const colormale='90FFFF'
+
   const [isHover, setIsHover] = useState(false);
   const [modal,setmodal]=useState(false);
   const [labels,setlabels]=useState([1,2,3,4,5,100]);
-  const [male1, setmale1] = useState([0, 10, 5, 2, 20, 30, 45]);
+
+  const [male1, setmale1] = useState([20, 10, 5, 2, 20, 30, 45]);
   const [female1, setfemale1] = useState([10, 0, 15, 22, 2, 13, 15]);
   const [others1, setothers1] = useState([15, 20, 65, 7,6 , 13, 17]);
+  
   const [startdate1,setstartdate1]=React.useState(new Date);
   const [enddate1,setenddate1]=React.useState(new Date);
+  
   const [startdate2,setstartdate2]=React.useState();
   const [enddate2,setenddate2]=React.useState();
 const labels2 = ["Others", "Female", "Male"];
@@ -44,7 +44,7 @@ const data = {
       },
       {
         label: "Others",
-        backgroundColor: "#FFD66B",
+        backgroundColor: "rgb(231, 208, 148,0.5)",
         borderColor: "#FFD66B",
         data: others1,
         fill:true,
@@ -61,9 +61,10 @@ const data = {
     },
     scales:{
       y:
-          {       min:0,
-                  max:900,
-                  stepSize:100            
+          {       
+            min:0,
+            max:900,
+            stepSize:100            
           }      
   }
     }
@@ -144,152 +145,155 @@ const data = {
           
   return (
     <>
-<div className="row" >
-  <div className="col-md-12"> 
-    <text style={{color:"#585858"}}>29 october</text>
-    </div>
-    <text style={{color:"#585858",fontSize:"24px"}}><strong>Overall Feed</strong></text>
+    <div className="row" >
+      <div className="col-md-12"> 
+        <text style={{color:"#585858"}}>29 october</text>
+      </div>
+        <text style={{color:"#585858",fontSize:"24px"}}><strong>Overall Feed</strong></text>
     </div>
    
-      <button size="15rem"  onClick={changemodal1} onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}  style={buttonstyle}>
-        +Add Filters</button> 
+    <button size="15rem"  onClick={changemodal1} onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}  style={buttonstyle}>
+                  +Add Filters
+    </button> 
      
-<div className="container">
-      <div className="row" >
-      <motion.div className="col-md-10" 
-      animate={{
-        x:0,
-        rotate:360
+    <div className="container">
+        <div className="row" >
+          <motion.div className="col-md-10" 
+            animate={{
+              x:0,
+              rotate:360
 
-      }}
-      initial={{
-        x:200
-        
-      }}
-      transition={{
-        type:"spring",
-        stiffness:60
-      }}
-      whileHover={{
-        scale:1.01
-        
-      }}
-      whileTap={{
-        scale:0.9
-      }}>
-        <Line data={data} options={options} style={{backgroundColor:"#FFFFFF",borderRadius:"5%"}}/>
-      </motion.div>
-      <div className="col-md-2">
-        <div className="row" style={{backgroundColor:"#FFFFFF",borderRadius:"5%"}}>
-        <h1 style={{color:"gray", fontFamily:"Garamond"}}>Analysis</h1>
-          <motion.div style={{padding:"13px",textAlign:"left"}}
-          animate={{
-            x:0,
-            rotate:360
-          }}
-          initial={{
-            x:200
-            
-          }}
-          transition={{
-            type:"spring",
-            stiffness:60
-          }}
-          whileHover={{
-            scale:1.1,
-            borderColor:"rgb(255, 99, 132)"
-          }}
-          whileTap={{
-            scale:0.9
-          }}>
-            <FaCircle size={28} color={colorothers}/>
-            <text style={{marginLeft:"6px"}}>Others
-                20
-            </text>
+            }}
+            initial={{
+              x:200
+              
+            }}
+            transition={{
+              type:"spring",
+              stiffness:60
+            }}
+            whileHover={{
+              scale:1.01
+              
+            }}
+            whileTap={{
+              scale:0.9
+            }}>
+              <Line data={data} options={options} style={{backgroundColor:"#FFFFFF",borderRadius:"5%"}}/>
             </motion.div>
 
-            <motion.div style={{padding:"13px",textAlign:"left"}}
-          animate={{
-            x:0,
-            rotate:360
-          }}
-          initial={{
-            x:200
-            
-          }}
-          transition={{
-            type:"spring",
-            stiffness:60
-          }}
-          whileHover={{
-            scale:1.1,
-            borderColor:"rgb(255, 99, 132)"
-          }}
-          whileTap={{
-            scale:0.9
-          }}>
-            <FaCircle size={28} color={colorfemale}/>
-            <text style={{marginLeft:"6px"}}>Female
-                20 
-            </text>
-            </motion.div>
-            <motion.div style={{padding:"13px",textAlign:"left"}}
-          animate={{
-            x:0,
-            rotate:360
-          }}
-          initial={{
-            x:200
-            
-          }}
-          transition={{
-            type:"spring",
-            stiffness:60
-          }}
-          whileHover={{
-            scale:1.1,
-            borderColor:"rgb(255, 99, 132)"
-          }}
-          whileTap={{
-            scale:0.9
-          }}>
-            <FaCircle size={28} color={colormale}/>
-            <text style={{marginLeft:"6px"}}>Male
-                20
-            </text>
-            </motion.div>     
+          <div className="col-md-2">
+            <div className="row" style={{backgroundColor:"#FFFFFF",borderRadius:"5%"}}>
+            <h1 style={{color:"gray", fontFamily:"Garamond"}}>Analysis</h1>
+              <motion.div style={{padding:"13px",textAlign:"left"}}
+              animate={{
+                x:0,
+                rotate:360
+              }}
+              initial={{
+                x:200
+                
+              }}
+              transition={{
+                type:"spring",
+                stiffness:60
+              }}
+              whileHover={{
+                scale:1.1,
+                borderColor:"rgb(255, 99, 132)"
+              }}
+              whileTap={{
+                scale:0.9
+              }}>
+                <FaCircle size={28} color={colorothers}/>
+                <text style={{marginLeft:"6px"}}>Others:
+                    {others1[0]}
+                </text>
+                </motion.div>
+
+                <motion.div style={{padding:"13px",textAlign:"left"}}
+              animate={{
+                x:0,
+                rotate:360
+              }}
+              initial={{
+                x:200
+                
+              }}
+              transition={{
+                type:"spring",
+                stiffness:60
+              }}
+              whileHover={{
+                scale:1.1,
+                borderColor:"rgb(255, 99, 132)"
+              }}
+              whileTap={{
+                scale:0.9
+              }}>
+                <FaCircle size={28} color={colorfemale}/>
+                <text style={{marginLeft:"6px"}}>Female:
+                    {female1[0]}
+                </text>
+                </motion.div>
+                <motion.div style={{padding:"13px",textAlign:"left"}}
+              animate={{
+                x:0,
+                rotate:360
+              }}
+              initial={{
+                x:200
+                
+              }}
+              transition={{
+                type:"spring",
+                stiffness:60
+              }}
+              whileHover={{
+                scale:1.1,
+                borderColor:"rgb(255, 99, 132)"
+              }}
+              whileTap={{
+                scale:0.9
+              }}>
+                <FaCircle size={28} color={colormale}/>
+                <text style={{marginLeft:"6px"}}>Male: 
+                    {male1[0]}
+                </text>
+                </motion.div>     
+            </div>
+          </div>
+          
+        <Timestampanalysis />
+          </div>
         </div>
-      </div>
-      
-<Filters />
-      </div>
-    </div>
    
 
     <Modal size="lg" isOpen={modal} toggle={()=>setmodal(!modal)}>
       <ModalHeader toggle={()=>setmodal(!modal)}>
         Add Filters
       </ModalHeader>
-      <ModalBody>
-      
-          
-            <Row style={{marginLeft:"2px"}}>Select Date From </Row>
-            <Row>          <DatePicker  
+      <ModalBody>      
+          <Row style={{marginLeft:"2px"}}>Select Date From </Row>
+            <Row>          
+              <DatePicker  
               selected={ startdate1 }  
               onChange={ date =>{
-                setstartdate1(date)
-                console.log("printing date: ", date.toISOString().substring(0, 10))
-                console.log("printing date type: ", typeof date.toISOString().substring(0, 10))
-                var date1=date.toISOString().substring(0, 10)
-                setstartdate2(date1)
-              console.log("date1 is ",date1)
-              console.log("date1 is -------")} }  
+                  setstartdate1(date)
+                  console.log("printing date: ", date.toISOString().substring(0, 10))
+                  console.log("printing date type: ", typeof date.toISOString().substring(0, 10))
+                  var date1=date.toISOString().substring(0, 10)
+                  setstartdate2(date1)
+                  console.log("date1 is ",date1)
+                  console.log("date1 is -------")} }  
               name="From Date"  
               dateFormat="yyyy-MM-dd"  
           /> </Row> 
+
           <Row style={{marginLeft:"2px"}}>Select Date To </Row>
-            <Row>          <DatePicker  
+            <Row>          
+              <DatePicker  
               selected={ enddate1 }  
               onChange={ date =>{
                 setenddate1(date)
@@ -302,10 +306,10 @@ const data = {
               name="To Date"  
               dateFormat="yyyy-MM-dd"  
           /> </Row>           
-        <Col className="mt-2">
+          <Col className="mt-2">
               <button onClick={changemodal1} type="submit" onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}  style={buttonstyle} >Apply</button>
-            </Col>
+                onMouseLeave={handleMouseLeave}  style={buttonstyle} >Apply</button>
+          </Col>
       </ModalBody>
     </Modal>
     </>
