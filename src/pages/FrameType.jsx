@@ -222,11 +222,11 @@ function CameraType() {
  {floor1.map((floor,index)=>{return<div className='col-md-6 mt-2' onClick={()=>{
   console.log("clickedddddddddd")
   if (floor[2]== true){
-    navigate('/saved', {floor_id: floor[0]});
+    navigate('/heatmap', {floor_id: floor[0]});
   }
 else{
   //route to page where cameras dont stitch
-  navigate('/saved',  {floor_id: floor[0]});
+  navigate('/NoHeatmap',  {floor_id: floor[0]});
 }
  }} style={{justifyContent:"left",height:"10rem",backgroundColor:"rgb(253,95,114,10%)",width:"20rem"}}>
           

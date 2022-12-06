@@ -21,7 +21,8 @@ function App() {
           <Route path="/cameras/frameview" element={<FrameType />} />
           <Route path="/messages" element={<FrameType />} />
           <Route path="/analytics" element={<Analytics />} />
-          <Route path="/saved" element={<Messages />} />
+          <Route path="/heatmap" element={<Messages />} />
+          <Route path="/NoHeatmap" element={<Messages />} />
 
 
           <Route path="*" element={<> not found</>} />

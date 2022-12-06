@@ -11,7 +11,7 @@ function Messages() {
   console.log("props",location.floor_id)
   const image_buffer = "data:image/png;base64,"
 
-  const [image, setImage] = React.useState("data:image/png;base64,");
+  const [image, setImage] = React.useState([]);
   const [image1, setImage1] = React.useState("data:image/png;base64,");
   const [image2, setImage2] = React.useState("data:image/png;base64,");
   const [image3, setImage3] = React.useState("data:image/png;base64,");
@@ -109,11 +109,11 @@ const boxStyle2 = {
       // console.log(evt.data);
       console.log("image received");
       var data = JSON.parse(evt.data);
-      setImage(image_buffer + data['image']);
-      setImage1(image_buffer + data['image1']);
-      setImage2(image_buffer + data['image2']);
-      setImage3(image_buffer + data['image3']);
-      setrandom(data["counts"]);
+      const frames = data['frames_arr'];
+      // console.log(frames);
+      // set frames in the state
+
+      setImage(frames);
       console.log("ffgggg "+data["counts"]["total_people"])
       setmale(data["counts"]["male_count"])
       setfemale(data["counts"]["female_count"])
@@ -140,12 +140,12 @@ const boxStyle2 = {
       <>
       <div className="row mt-3">
 
-<img className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
+{/* <img className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
 src={image}
 alt="Video" 
 />
-{/*    <div className='col-md-6'>
-<DonutFrame/></div> */}
+    <div className='col-md-6'>
+<DonutFrame/></div> 
    <img className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
 src={image2}
 alt="Video" 
@@ -153,7 +153,17 @@ alt="Video"
    <img className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
 src={image3}
 alt="Video" 
-/>
+/> */}
+{
+          image.map((frame, index) => {
+            return (
+              <div key={index}>
+                <img src={image_buffer + frame} className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}} alt="logo" />
+              </div>
+            )
+          })
+
+        }
 
 
 
@@ -190,24 +200,16 @@ alt="Video"
       <>
       <div className="row mt-3">
 
-<img className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
-src={image}
-alt="Video" 
-/>
-{/*    <div className='col-md-6'>
-<DonutFrame/></div> */}
-   <img className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
-src={image2}
-alt="Video" 
-/>
-   <img className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
-src={image3}
-alt="Video" 
-/>
+      {
+          image.map((frame, index) => {
+            return (
+              <div key={index}>
+                <img src={image_buffer + frame} className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}} alt="logo" />
+              </div>
+            )
+          })
 
-
-
-
+        }
 
 </div>
 

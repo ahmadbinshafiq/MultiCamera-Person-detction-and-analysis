@@ -63,8 +63,13 @@ const routes = [
     ],
   },
   {
-    path: "/saved",
-    name: "Saved",
+    path: "/heatmap",
+    name: "Heatmap",
+    icon: <AiFillHeart />,
+  },
+  {
+    path: "/noheatmap",
+    name: "Simple",
     icon: <AiFillHeart />,
   },
 ];
