@@ -7,7 +7,9 @@ import FrameType from "./pages/FrameType";
 import Analytics from "./pages/Analytics";
 import Cameras from "./pages/Cameras";
 import CameraType from "./pages/CameraType";
-import Messages from "./pages/Messages";
+import Donutchartforframe from "./pages/Donutchartforframe";
+import Heatmapfeed from "./components/Heatmapfeed";
+import NoHeatmapfeed from "./components/NoHeatmapfeed";
 
 function App() {
   return (
@@ -19,15 +21,16 @@ function App() {
           <Route path="/cameras" element={<Cameras />} />
           <Route path="/cameras/gridview" element={<Cameras />} />
           <Route path="/cameras/frameview" element={<FrameType />} />
-          <Route path="/messages" element={<FrameType />} />
+          <Route path="/messages" element={<Donutchartforframe />} />
           <Route path="/analytics" element={<Analytics />} />
-          <Route path="/heatmap" element={<Messages />} />
-          <Route path="/NoHeatmap" element={<Messages />} />
-
-
           <Route path="*" element={<> not found</>} />
+          {/* <Route path="/Noheatmap" element={<Donutchartforframe />} /> */}
         </Routes>
       </SideBar>
+      <Routes>
+        <Route path="/heatmap" element={<Heatmapfeed />} />
+        <Route path="/Noheatmap" element={<NoHeatmapfeed />} />
+      </Routes>
     </Router>
 </div>
   );

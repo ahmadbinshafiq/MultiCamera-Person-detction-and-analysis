@@ -3,7 +3,7 @@ import DonutFrame from './DonutFrame';
 import ComputationalCostFrame from './ComputationalCostFrame';
 import { Line,Bar,Doughnut } from "react-chartjs-2";
 import {useLocation} from "react-router-dom";
-export default function Heatmapfeed() {
+export default function NoHeatmapfeed() {
     const location=useLocation();
   
     console.log("props",location.floor_id)

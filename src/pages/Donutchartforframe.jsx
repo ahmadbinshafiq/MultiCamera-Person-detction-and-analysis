@@ -4,8 +4,8 @@ import React from 'react';
 import DonutFrame from '../components/DonutFrame';
 import { Line,Bar,Doughnut } from "react-chartjs-2";
 import {useLocation} from "react-router-dom";
-
-function Messages() {
+import ComputationalCostFrame from '../components/ComputationalCostFrame';
+function Donutchartforframe() {
   const location=useLocation();
   
   console.log("props",location.floor_id)
@@ -28,7 +28,7 @@ function Messages() {
   const [adult, setadult] = React.useState("35");
 
 
-  console.log(image.slice(0, 10));
+  //console.log(image.slice(0, 10));
   const boxStyle = {
     backgroundColor:"black", borderRadius: "15px",
     padding:"3px",      
@@ -138,6 +138,12 @@ const boxStyle2 = {
   if (chartType=="Doughnut"){
     return (
       <>
+    <div className="conatiner" >
+      <div style={{color:"#F7F8FC"}} ><h1>ffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhjjjjjjjjjjjjjjjjjjjjjjjjjj</h1></div>
+    </div>
+      <div className="mt-2">
+        <ComputationalCostFrame />
+      </div>
       <div className="row mt-3">
 
 {/* <img className='my-2 mx-2' style={{borderRadius:"25px",width: "20rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
@@ -198,6 +204,12 @@ alt="Video"
   if (chartType=="Bar"){
     return (
       <>
+  <div className="conatiner" >
+      <div style={{color:"#F7F8FC"}} ><h1>ffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhjjjjjjjjjjjjjjjjjjjjjjjjjj</h1></div>
+    </div>
+      <div className="mt-2">
+        <ComputationalCostFrame />
+      </div>
       <div className="row mt-3">
 
       {
@@ -243,4 +255,4 @@ alt="Video"
 
 
   
-  export default Messages;
+  export default Donutchartforframe;

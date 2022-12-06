@@ -12,9 +12,10 @@ import { MdOutlineCameraIndoor } from "react-icons/md";
 import { MdCameraOutdoor } from "react-icons/md";
 import { MdOtherHouses } from "react-icons/md";
 import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
-import Messages from './Messages';
+import Messages from './Donutchartforframe';
 import DonutFrame from '../components/DonutFrame';
 import {useNavigate} from "react-router-dom"
+import Donutchartforframe from './Donutchartforframe';
 function CameraType() {
   const navigate=useNavigate();
   const ip2=["11"]
@@ -226,7 +227,7 @@ function CameraType() {
   }
 else{
   //route to page where cameras dont stitch
-  navigate('/NoHeatmap',  {floor_id: floor[0]});
+  navigate('/Noheatmap',  {floor_id: floor[0]});
 }
  }} style={{justifyContent:"left",height:"10rem",backgroundColor:"rgb(253,95,114,10%)",width:"20rem"}}>
           
@@ -242,6 +243,7 @@ else{
           
         
       {/*   <Messages/> */}
+      {/* {<Donutchartforframe/>} */}
     </>
   )
 }
