@@ -3,9 +3,17 @@ import CameraAdd from './CameraAdd'
 
 function CameraView() {
     //const ip=["11","22","33","333"]
-    const ip1=["1","2","3","4","5","6","7","8","9"]
+    const ip1=["1","2","3"]
+    var ipp=[];
     const [ip,setip]=useState()
     const [motion,setmotion]=useState("cam")
+    const image_buffer = "data:image/png;base64,"
+    const [image, setImage] = React.useState("data:image/png;base64,");
+    const [image1, setImage1] = React.useState("data:image/png;base64,");
+    const [image2, setImage2] = React.useState("data:image/png;base64,");
+    const [image3, setImage3] = React.useState("data:image/png;base64,");
+    const [images, setImages] = React.useState([]);
+
     const [feedtype,setfeedtype]=useState("View Motion Detection")
     const [colormotion,setcolormotion]=useState("white")
     const [colorfeed,setcolorfeed]=useState("black")
@@ -22,7 +30,7 @@ function CameraView() {
     }
 
 
-    useEffect(()=>{
+  /*   useEffect(()=>{
       console.log("wwwww")
       fetch(`/video_feed/getemp`, {
         method: 'GET',
@@ -37,7 +45,30 @@ function CameraView() {
             //console.log('ip', ip[1].camera_ip)
         })
         .catch(err => console.log(err))
-    },[ip])
+    },[ip]) */
+    React.useEffect(() => {
+      const ws = new WebSocket('ws://localhost:8000/ws');
+  
+      ws.onopen = () => {
+        console.log('connected');
+        ws.send('start');
+      }
+      ws.onmessage = evt => {
+        // console.log(evt.data);
+        console.log("image received");
+        var data = JSON.parse(evt.data);
+        const frames = data['frames_arr'];
+      // console.log(frames);
+      // set frames in the state
+
+      setImage(frames);
+
+      }
+      ws.onclose = () => {
+        console.log('disconnected');
+      }
+    }, []);
+   
     const [isHover, setIsHover] = useState(false);
 
     const handleMouseEnter = () => {
@@ -76,7 +107,11 @@ function CameraView() {
     
 {/* {ip?.map(x=> <div className="card col-md-6 my-3 mx-4" style={{backgroundColor:"white",boxshadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",justifyContent:"center",alignItems:"center"}}>
             */}
-{/*             {ip?.map(x=><img className='my-2 mx-2' style={{borderRadius:"25px",width: "28rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
+  {/*           {image.map((frame,index)=><img className='my-2 mx-2' style={{borderRadius:"25px",width: "28rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
+    src={image_buffer + frame}
+    alt="Video" 
+   />)}  */}
+   {/*             {ip?.map(x=><img className='my-2 mx-2' style={{borderRadius:"25px",width: "28rem",boxshadow: "1px 2px 3px 4px rgba(20,20,20,0.4)"}}
     src={`http://localhost:8000/video_feed/${motion}/${x.camera_ip}`}
     alt="Video" 
    />)} */}

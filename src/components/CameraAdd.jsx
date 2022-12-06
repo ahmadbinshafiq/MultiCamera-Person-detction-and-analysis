@@ -6,6 +6,7 @@ import { AiOutlineMobile } from "react-icons/ai";
 import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
 import { useFormik } from "formik";
 import { camSchema } from "./schemas";
+
 const initialValues = {
   camname: "",
   camip: "",
@@ -32,7 +33,9 @@ function CameraAdd() {
     const [modal,setmodal]=useState(false);
     const [colorcctv,setcolorcctv]=useState("grey");
     const [colormob,setcolormob]=useState("grey");
-
+    const [FileBase64String1,setFileBase64String1]=useState();
+    const [FileBase64String2,setFileBase64String2]=useState();
+    const [FileBase64String3,setFileBase64String3]=useState();
 
     const [isHover, setIsHover] = useState(false);
     const handleMouseEnter = () => {
@@ -68,7 +71,36 @@ function CameraAdd() {
         color: isHover ? 'black' : 'white',
       };
 
-    
+      const encodeFileBase641 = (file) => {
+        var reader = new FileReader();
+        console.log("\nfile", file);
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          var Base64 = reader.result;
+          console.log("Base64", Base64);
+    setFileBase64String1(Base64);
+        };
+      }
+      const encodeFileBase642 = (file) => {
+        var reader = new FileReader();
+        console.log("\nfile", file);
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          var Base64 = reader.result;
+          console.log("Base64", Base64);
+    setFileBase64String2(Base64);
+        };
+      }
+      const encodeFileBase643 = (file) => {
+        var reader = new FileReader();
+        console.log("\nfile", file);
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          var Base64 = reader.result;
+          console.log("Base64", Base64);
+    setFileBase64String3(Base64);
+        };
+      }
         /* const handleSubmit = (event) => {
           console.log('Called handleSubmit')
           console.log(camname)
@@ -100,6 +132,7 @@ function CameraAdd() {
             setmodal(true)
           }
         }
+
         const changeColormob=()=>{
          
           if (colormob==="black"){
@@ -114,6 +147,7 @@ function CameraAdd() {
         const changemodal=()=>{
             setmodal(true)          
         }
+        
   return (
     <>
       
@@ -178,6 +212,33 @@ function CameraAdd() {
                     ) : null}
               </div>
             </Col>
+            <Col lg={12}>
+              <div>
+                <label htmlFor="name"> Choose File </label><br/>
+                <input type="file" id="myfile" name="myfile" onChange={(e) => {
+                  encodeFileBase641(e.target.files[0]);
+                }}></input>
+                     
+              </div>
+            </Col>
+            <Col lg={12}>
+              <div>
+                <label htmlFor="name"> Choose File Heatmap </label><br/>
+                <input type="file" id="myfile" name="myfile" onChange={(e) => {
+                  encodeFileBase642(e.target.files[0]);
+                }}></input>
+                     
+              </div>
+            </Col>
+            <Col lg={12}>
+              <div>
+                <label htmlFor="name"> Choose File Homography</label><br/>
+                <input type="file" id="myfile" name="myfile" onChange={(e) => {
+                  encodeFileBase643(e.target.files[0]);
+                }}></input>
+                     
+              </div>
+            </Col>
             <Col>
               <button style={buttonstylesubmit} type="submit" onClick={handleSubmit}>Submit</button>
             </Col>
@@ -193,4 +254,4 @@ function CameraAdd() {
   )
 }
 
-export default CameraAdd
+export default CameraAdd;

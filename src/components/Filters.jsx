@@ -3,8 +3,12 @@ import { Line,Bar,Doughnut,Pie } from "react-chartjs-2";
 import {motion} from 'framer-motion';
 import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
 import AsyncSelect from "react-select/async";
+import DatePicker from 'react-datepicker'; 
+import timepicker from 'react-time-picker';  
+import "react-datepicker/dist/react-datepicker.css";   
 const labels = ["0", "1", "2", "3", "4", "5"];
 const labels2 = ["Others", "Female", "Male"];
+
 const data = {
   labels: labels,
   datasets: [
@@ -24,26 +28,15 @@ const data = {
       },
   ],
 };
-const data2 = {
-  labels: labels2,
-  datasets: [
-    {
-      label: "Previous Day",
-      backgroundColor: "#B880FF",
-      borderColor: "rgb(255, 99, 132)",
-      data: [20, 30, 45],
-    },
-    {
-        label: "Current Day",
-        backgroundColor: "cyan",
-        borderColor: "cyan",
-        data: [2, 13, 15],
-      },
-  ],
-};
+
 
 export default function Filters() {
-
+  const data5 = {
+    "date_start": "2022-12-05",
+    "date_end": "2022-12-06",
+    "time_start": "02:00:00",
+    "time_end": "23:00:59"
+}
     const options2 = {
       type: 'bar',
       data: data,
@@ -71,9 +64,11 @@ export default function Filters() {
     const [others2, setothers2] = React.useState("75");
     const [dateopt,setdateopt]=React.useState([{}]);
     const [dateopt1,setdateopt1]=React.useState([{}]);
+    const [startdate1,setstartdate1]=React.useState(new Date);
+    const [enddate1,setenddate1]=React.useState(new Date);
     const [dayfirst,setdayfirst]=React.useState();
     const [daysecond,setdaysecond]=React.useState();
-    const [timeStamp1,settimeStamp1]=React.useState();
+    const [timeStamp1,settimeStamp1]=React.useState("2");
     const [timeStamp2,settimeStamp2]=React.useState();
     const data1 = {
       labels: [
@@ -92,6 +87,23 @@ export default function Filters() {
         ],
         
       }]
+    };
+    const data2 = {
+      labels: labels2,
+      datasets: [
+        {
+          label: "Previous Day",
+          backgroundColor: "#B880FF",
+          borderColor: "rgb(255, 99, 132)",
+          data: [male1, female1, others1],
+        },
+        {
+            label: "Current Day",
+            backgroundColor: "cyan",
+            borderColor: "cyan",
+            data: [male2, female2, others2],
+          },
+      ],
     };
     const data3 = {
         labels: [
@@ -123,32 +135,26 @@ export default function Filters() {
       callback(filterOption)
       },2000)
     }
-    React.useEffect(() => {
-      const ws = new WebSocket('ws://localhost:8000/ws');
-  
-      ws.onopen = () => {
-        console.log('connected');
-        ws.send('start');
-      }
-      ws.onmessage = evt => {
-        // console.log(evt.data);
-        //console.log("image received");
-        var data = JSON.parse(evt.data);
-        //console.log(data["counts1"][0].value)
-        setdateopt(data["counts1"])
-        setdateopt1(data["counts2"])
-        var dataa=dateopt
-        //console.log("ffff",dataa)
-        //console.log("ffffr",dateopt[0])
-        setmale1(data["counts"]["male_count"])
-        setfemale1(data["counts"]["female_count"])
-        setothers1(data["counts"]["unknown_count"])
-        //..........Setmale2 etc will be set here.........
-      }
-      ws.onclose = () => {
-        console.log('disconnected');
-      }
-    }, []);
+
+    
+/*     React.useEffect(()=>{
+      console.log("wwwww")
+      fetch(`/analytics/interval_based_analytics`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data5)
+    })
+        .then(res => res.json())
+        .then(data => {
+          console.log("dataaaa",data)
+           
+            //console.log('ip', ip[1].camera_ip)
+        })
+        .catch(err => console.log(err))
+    },[]) */
+    
     const handleMouseEnter = () => {
        setIsHover(true);
     }; 
@@ -182,7 +188,43 @@ export default function Filters() {
     const changemodal=()=>{
             setmodal(!modal)          
         }
-
+      const changemodal1=()=>{
+        console.log("wwwww")
+        setmodal(!modal) 
+        fetch(`/analytics/timestamp_based_analytics_per_day`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data5)
+      })
+          .then(res => res.json())
+          .then(data => {
+            console.log("dataaaa",data.first_day.adult_count)
+              setmale1(data.first_day.males_count)
+              setfemale1(data.first_day.females_count)
+              setothers1(data.first_day.unknown_count)
+              setmale2(data.second_day.males_count)
+              setfemale2(data.second_day.females_count)
+              setothers2(data.second_day.unknown_count)
+              //console.log('ip', ip[1].camera_ip)
+          })
+          .catch(err => console.log(err))  }       
+     /*    fetch(`/analytics/interval_based_analytics`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data5)
+      })
+          .then(res => res.json())
+          .then(data => {
+            console.log("dataaaa",data)
+             
+              //console.log('ip', ip[1].camera_ip)
+          })
+          .catch(err => console.log(err)) */
+        
 
     const handlechange1=(selectedOption)=>{
       console.log("handlechange1",selectedOption)
@@ -204,6 +246,7 @@ export default function Filters() {
       console.log("handlechange4",selectedOption)
       settimeStamp2(selectedOption.value)
     }
+
   
   return (
     <>
@@ -298,20 +341,27 @@ export default function Filters() {
       <ModalBody>
       
           
-            <Row style={{marginLeft:"2px"}}>Select First Day </Row>
-            <Row><AsyncSelect loadOptions={loadOptions} onChange={handlechange1}/></Row>
-            <Row style={{marginLeft:"2px"}}>Select Second Day 2</Row>
-            <Row><AsyncSelect loadOptions={loadOptions} onChange={handlechange2}/></Row>
+            <Row style={{marginLeft:"2px"}}>Select Date From </Row>
+            <Row>          <DatePicker  
+              selected={ startdate1 }  
+              onChange={ date =>setstartdate1(date) }  
+              name="From Date"  
+              dateFormat="yyyy-MM-dd"  
+          /> </Row> 
+          <Row style={{marginLeft:"2px"}}>Select Date To </Row>
+            <Row>          <DatePicker  
+              selected={ enddate1 }  
+              onChange={ date =>setenddate1(date) }  
+              name="To Date"  
+              dateFormat="yyyy-MM-dd"  
+          /> </Row>           
             <Row style={{marginLeft:"2px"}} >From(TimeStamp)</Row>
-            <Row><AsyncSelect loadOptions={loadOptions1} onChange={handlechange3}/></Row>
-            <Row style={{marginLeft:"2px"}} >To(TimeStamp)</Row>
+              <Row style={{marginLeft:"2px"}} >To(TimeStamp)</Row>
             <Row><AsyncSelect loadOptions={loadOptions1} onChange={handlechange4}/></Row>
             <Col className="mt-2">
-              <button onClick={changemodal} type="submit" onMouseEnter={handleMouseEnter}
+              <button onClick={changemodal1} type="submit" onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}  style={buttonstyle1} >Apply</button>
             </Col>
-          
-     
       </ModalBody>
     </Modal>
 

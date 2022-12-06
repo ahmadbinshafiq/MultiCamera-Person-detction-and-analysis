@@ -3,9 +3,12 @@ import ws from 'ws';
 import React from 'react';
 import DonutFrame from '../components/DonutFrame';
 import { Line,Bar,Doughnut } from "react-chartjs-2";
-
+import {useLocation} from "react-router-dom";
 
 function Messages() {
+  const location=useLocation();
+  
+  console.log("props",location.floor_id)
   const image_buffer = "data:image/png;base64,"
 
   const [image, setImage] = React.useState("data:image/png;base64,");

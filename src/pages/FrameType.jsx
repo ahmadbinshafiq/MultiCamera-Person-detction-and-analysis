@@ -1,4 +1,4 @@
-import React,{ useState }  from 'react';
+import React,{ useState,useEffect }  from 'react';
 import {motion} from 'framer-motion';
 import Linechart from "../components/Linechart";
 import ComputationalCostFrame from "../components/ComputationalCostFrame";
@@ -14,7 +14,9 @@ import { MdOtherHouses } from "react-icons/md";
 import {Modal,ModalHeader,ModalBody,Row,Col} from "reactstrap";
 import Messages from './Messages';
 import DonutFrame from '../components/DonutFrame';
+import {useNavigate} from "react-router-dom"
 function CameraType() {
+  const navigate=useNavigate();
   const ip2=["11"]
   const [isHover, setIsHover] = useState(false);
   const buttonstyle = {
@@ -42,6 +44,7 @@ function CameraType() {
     const [colorout,setcolorout]=useState("grey");
     const [colorothers,setcolorothers]=useState("grey");
     const [colorcircle,setcolorcircle]=useState("#800000");
+    const [floor1,setfloor1]=useState([]);
 
     const handleSubmit = (event) => {
       console.log('Called handleSubmit')
@@ -122,6 +125,24 @@ function CameraType() {
        backgroundColor: isHover ?  'black':'white' ,
        color: isHover ?   'white':'black',
     };
+    useEffect(()=>{
+      fetch(`/floor/all/deep`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(res => res.json())
+        .then(data => {
+          console.log("dataaaa",data)
+          setfloor1(data)
+
+          //console.log("dataaaa",data.labels)
+
+        })
+        .catch(err => console.log(err))
+    })
+        console.log("dataaaa-------------------------",floor1)
   return (
     <>
 
@@ -198,14 +219,27 @@ function CameraType() {
             onMouseLeave={handleMouseLeave}  style={buttonstyle}>
         +Add Frame</button> 
         
-          <div className='col-md-6 mt-2' style={{justifyContent:"left",height:"10rem",backgroundColor:"rgb(253,95,114,10%)",width:"20rem"}}>
+ {floor1.map((floor,index)=>{return<div className='col-md-6 mt-2' onClick={()=>{
+  console.log("clickedddddddddd")
+  if (floor[2]== true){
+    navigate('/saved', {floor_id: floor[0]});
+  }
+else{
+  //route to page where cameras dont stitch
+  navigate('/saved',  {floor_id: floor[0]});
+}
+ }} style={{justifyContent:"left",height:"10rem",backgroundColor:"rgb(253,95,114,10%)",width:"20rem"}}>
+          
            <div style={{paddingLeft:"15px"}}>
-            <p>Outdoor</p>
-            
-              <h1>Frame1</h1>
-            <h4>Cameras:2</h4>
+            <div key={index}>
+          
+              <h1>{floor[1]}</h1>
+            <h4>{floor[3]}</h4>
             </div>
-          </div>
+            </div>
+            </div>
+})}
+          
         
         <Messages/>
     </>
