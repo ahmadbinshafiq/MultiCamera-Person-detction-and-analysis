@@ -5,17 +5,24 @@ import CameraView from "../components/CameraView";
 import Cameras from "../pages/Cameras";
 import Footer from "../components/Footer";
 import CameraAdd from '../components/CameraAdd';
+import ComputationalCostFrame from '../components/ComputationalCostFrame';
+
+
 function Dashboard() {
+
   return (
     <>
-    <div style={{backgroundColor:"#F7F8FC"}} >
-      <Linechart />
-      <ComputationalCost/>
-      {/* <CameraAdd/> */}
-      <CameraView/>
+      <div style={{ backgroundColor: "#F7F8FC" }} >
+        <Linechart />
+        {/* <ComputationalCost /> */}
+        {/* <CameraAdd/> */}
 
-      {/* <Footer/> */}
-    </div>
+        <ComputationalCostFrame />
+
+        <CameraView />
+
+        {/* <Footer/> */}
+      </div>
 
     </>
   )
